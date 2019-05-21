@@ -90,6 +90,7 @@ RUN set -eux; \
 	mkdir -p var/cache var/log; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer run-script --no-dev post-install-cmd; \
+#	composer config --global repo.packagist composer https://packagist.org; \
 	chmod +x bin/console; sync
 VOLUME /srv/api/var
 
@@ -116,3 +117,13 @@ COPY --from=api_platform_php /srv/api/public public/
 FROM cooptilleuls/varnish:${VARNISH_VERSION}-alpine AS api_platform_varnish
 
 COPY docker/varnish/conf/default.vcl /usr/local/etc/varnish/default.vcl
+
+# api/Dockerfile
+FROM api_platform_php as api_platform_php_dev
+
+ARG XDEBUG_VERSION=2.7.2
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+	pecl install xdebug-$XDEBUG_VERSION; \
+	docker-php-ext-enable xdebug; \
+	apk del .build-deps
