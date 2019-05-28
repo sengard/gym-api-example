@@ -3,22 +3,29 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints  as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var string
+     *
+     * @ORM\Id
+     * @ORM\Column(type="guid")
+     * @Assert\Uuid
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Assert\Email
      */
     private $email;
 
@@ -33,7 +40,12 @@ class User implements UserInterface
      */
     private $password;
 
-    public function getId(): ?int
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): string
     {
         return $this->id;
     }

@@ -1,16 +1,35 @@
-# api/config/schema.yaml
-# The list of types and properties we want to use
 id:
     generationStrategy: uuid
     writable: true
+validator:
+    assertType: true
 types:
-    Person:
+    # Parent class of Person
+    Thing:
         properties:
             name: ~
+    Person:
+        properties:
             familyName: ~
             givenName: ~
             additionalName: ~
-            address: ~
+            address: { range: "PostalAddress" }
+            affiliation: ~
+            birthDate: ~
+            birthPlace: ~
+            gender: ~
+            hasOccupation: { range: "Occupation" }
+            height: { range: "QuantitativeValue" }
+            homeLocation: { range: "Place" }
+            #todo: maybe fix it to user Type with constraints
+            jobTitle: ~
+            knowsLanguage: 
+                range: "Language"
+                cardinality: "(*..*)"
+            nationality: { range: "Country" }
+            telephone: ~
+            weight: { range: "QuantitativeValue" }
+            worksFor: { range: "Organization" }
     PostalAddress:
         # Disable the generation of the class hierarchy for this type
 #        parent: false
@@ -22,3 +41,38 @@ types:
             postOfficeBoxNumber: ~
             postalCode: ~
             streetAddress: ~
+    QuantitativeValue:
+        properties:
+            value: ~
+            unitCode: ~
+    Place:
+        properties:
+            address: { range: "PostalAddress" }
+    Country:
+        properties:
+            name: ~
+    Organization:
+        properties:
+            name: ~
+    Occupation:
+        properties:
+            name: ~
+    Language:
+        properties:
+            name: ~
+            alpha2: { range: "Text" }
+            alpha3: { range: "Text" }
+    
+
+
+#            "jobLocation": {
+#                "@type": "Place",
+#                "address": {
+#                    "@type": "PostalAddress",
+#                    "streetAddress": "555 Clancy St",
+#                    "addressLocality": "Detroit",
+#                    "addressRegion": "MI",
+#                    "postalCode": "48201",
+#                    "addressCountry": "US"
+#                }
+#            }

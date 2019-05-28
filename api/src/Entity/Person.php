@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,14 +29,6 @@ class Person
      * @Assert\Uuid
      */
     private $id;
-
-    /**
-     * @var string|null the name of the item
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @ApiProperty(iri="http://schema.org/name")
-     */
-    private $name;
 
     /**
      * @var string|null Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.
@@ -68,6 +62,116 @@ class Person
      */
     private $address;
 
+    /**
+     * @var Organization|null An organization that this person is affiliated with. For example, a school/university, a club, or a team.
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
+     * @ApiProperty(iri="http://schema.org/affiliation")
+     */
+    private $affiliation;
+
+    /**
+     * @var \DateTimeInterface|null date of birth
+     *
+     * @ORM\Column(type="date", nullable=true)
+     * @ApiProperty(iri="http://schema.org/birthDate")
+     * @Assert\Date
+     */
+    private $birthDate;
+
+    /**
+     * @var Place|null the place where the person was born
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Place")
+     * @ApiProperty(iri="http://schema.org/birthPlace")
+     */
+    private $birthPlace;
+
+    /**
+     * @var string|null Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @ApiProperty(iri="http://schema.org/gender")
+     */
+    private $gender;
+
+    /**
+     * @var Occupation
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Occupation")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     */
+    private $hasOccupation;
+
+    /**
+     * @var QuantitativeValue|null the height of the item
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ApiProperty(iri="http://schema.org/height")
+     */
+    private $height;
+
+    /**
+     * @var Place|null a contact location for a person's residence
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
+     * @ApiProperty(iri="http://schema.org/homeLocation")
+     */
+    private $homeLocation;
+
+    /**
+     * @var string|null the job title of the person (for example, Financial Manager)
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @ApiProperty(iri="http://schema.org/jobTitle")
+     */
+    private $jobTitle;
+
+    /**
+     * @var Collection<Language>|null
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Language")
+     */
+    private $knowsLanguages;
+
+    /**
+     * @var Country|null nationality of the person
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
+     * @ApiProperty(iri="http://schema.org/nationality")
+     */
+    private $nationality;
+
+    /**
+     * @var string|null the telephone number
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @ApiProperty(iri="http://schema.org/telephone")
+     */
+    private $telephone;
+
+    /**
+     * @var QuantitativeValue|null the weight of the product or person
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ApiProperty(iri="http://schema.org/weight")
+     */
+    private $weight;
+
+    /**
+     * @var Organization|null organizations that the person works for
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
+     * @ApiProperty(iri="http://schema.org/worksFor")
+     */
+    private $worksFor;
+
+    public function __construct()
+    {
+        $this->knowsLanguages = new ArrayCollection();
+    }
+
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -76,16 +180,6 @@ class Person
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function setName(?string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 
     public function setFamilyName(?string $familyName): void
@@ -126,5 +220,140 @@ class Person
     public function getAddress(): ?PostalAddress
     {
         return $this->address;
+    }
+
+    public function setAffiliation(?Organization $affiliation): void
+    {
+        $this->affiliation = $affiliation;
+    }
+
+    public function getAffiliation(): ?Organization
+    {
+        return $this->affiliation;
+    }
+
+    public function setBirthDate(?\DateTimeInterface $birthDate): void
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthPlace(?Place $birthPlace): void
+    {
+        $this->birthPlace = $birthPlace;
+    }
+
+    public function getBirthPlace(): ?Place
+    {
+        return $this->birthPlace;
+    }
+
+    public function setGender(?string $gender): void
+    {
+        $this->gender = $gender;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setHasOccupation(Occupation $hasOccupation): void
+    {
+        $this->hasOccupation = $hasOccupation;
+    }
+
+    public function getHasOccupation(): Occupation
+    {
+        return $this->hasOccupation;
+    }
+
+    public function setHeight(?QuantitativeValue $height): void
+    {
+        $this->height = $height;
+    }
+
+    public function getHeight(): ?QuantitativeValue
+    {
+        return $this->height;
+    }
+
+    public function setHomeLocation(?Place $homeLocation): void
+    {
+        $this->homeLocation = $homeLocation;
+    }
+
+    public function getHomeLocation(): ?Place
+    {
+        return $this->homeLocation;
+    }
+
+    public function setJobTitle(?string $jobTitle): void
+    {
+        $this->jobTitle = $jobTitle;
+    }
+
+    public function getJobTitle(): ?string
+    {
+        return $this->jobTitle;
+    }
+
+    public function addKnowsLanguage(Language $knowsLanguage): void
+    {
+        $this->knowsLanguages[] = $knowsLanguage;
+    }
+
+    public function removeKnowsLanguage(Language $knowsLanguage): void
+    {
+        $this->knowsLanguages->removeElement($knowsLanguage);
+    }
+
+    public function getKnowsLanguages(): Collection
+    {
+        return $this->knowsLanguages;
+    }
+
+    public function setNationality(?Country $nationality): void
+    {
+        $this->nationality = $nationality;
+    }
+
+    public function getNationality(): ?Country
+    {
+        return $this->nationality;
+    }
+
+    public function setTelephone(?string $telephone): void
+    {
+        $this->telephone = $telephone;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setWeight(?QuantitativeValue $weight): void
+    {
+        $this->weight = $weight;
+    }
+
+    public function getWeight(): ?QuantitativeValue
+    {
+        return $this->weight;
+    }
+
+    public function setWorksFor(?Organization $worksFor): void
+    {
+        $this->worksFor = $worksFor;
+    }
+
+    public function getWorksFor(): ?Organization
+    {
+        return $this->worksFor;
     }
 }
