@@ -1,0 +1,144 @@
+
+#            "jobLocation": {
+#                "@type": "Place",
+#                "address": {
+#                    "@type": "PostalAddress",
+#                    "streetAddress": "555 Clancy St",
+#                    "addressLocality": "Detroit",
+#                    "addressRegion": "MI",
+#                    "postalCode": "48201",
+#                    "addressCountry": "US"
+#                }
+#            }
+#FIFA: 
+#Dial: 
+#ISO3166-1-Alpha-3: 
+#MARC: 
+#is_independent: 
+#ISO3166-1-numeric: 
+#GAUL: 
+#FIPS: 
+#WMO: 
+#ISO3166-1-Alpha-2: 
+#ITU: 
+#IOC: 
+#DS: 
+#'UNTERM Spanish Formal': 
+#'Global Code': 
+#'Intermediate Region Code': 
+#official_name_fr: 
+#'UNTERM French Short': 
+#ISO4217-currency_name: 
+#'Developed / Developing Countries': 
+#'UNTERM Russian Formal': 
+#'UNTERM English Short': 
+#ISO4217-currency_alphabetic_code: 
+#'Small Island Developing States (SIDS)': 
+#'UNTERM Spanish Short': 
+#ISO4217-currency_numeric_code: 
+#'UNTERM Chinese Formal': 
+#'UNTERM French Formal': 
+#'UNTERM Russian Short': 
+#M49: 
+#'Sub-region Code': 
+#'Region Code': 
+#official_name_ar: 
+#ISO4217-currency_minor_unit: 
+#'UNTERM Arabic Formal': 
+#'UNTERM Chinese Short': 
+#'Land Locked Developing Countries (LLDC)': 
+#'Intermediate Region Name': 
+#official_name_es: 
+#'UNTERM English Formal': 
+#official_name_cn: 
+#official_name_en: 
+#ISO4217-currency_country_name: 
+#'Least Developed Countries (LDC)': 
+#'Region Name': 
+#'UNTERM Arabic Short': 
+#'Sub-region Name': 
+#official_name_ru: 
+#'Global Name': 
+#Capital: 
+#Continent: 
+#TLD: 
+#Languages:
+#'Geoname ID': 
+#'CLDR display name':
+#EDGAR:
+
+
+
+https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv
+#Country
+#FIFA:  { range: "Text" }
+#Dial: { range: "Text" }
+#ISO3166-1-Alpha-3:  { range: "Text" }
+#MARC: { range: "Text" }
+#is_independent: { range: "Text" }
+#ISO3166-1-numeric: { range: "Text" }
+#GAUL: { range: "Text" }
+#FIPS: { range: "Text" }
+#WMO: { range: "Text" }
+#ISO3166-1-Alpha-2: { range: "Text" }
+#ITU: { range: "Text" }
+#IOC: { range: "Text" }
+#DS: { range: "Text" }
+#'UNTERM Spanish Formal': { range: "Text" }
+#'Global Code': { range: "Text" }
+#'Intermediate Region Code': { range: "Text" }
+#official_name_fr: { range: "Text" }
+#'UNTERM French Short': { range: "Text" }
+#ISO4217-currency_name: { range: "Text" }
+#'Developed / Developing Countries': { range: "Text" }
+#'UNTERM Russian Formal': { range: "Text" }
+#'UNTERM English Short': { range: "Text" }
+#ISO4217-currency_alphabetic_code: { range: "Text" }
+#'Small Island Developing States (SIDS)': { range: "Text" }
+#'UNTERM Spanish Short': { range: "Text" }
+#ISO4217-currency_numeric_code: { range: "Text" }
+#'UNTERM Chinese Formal': { range: "Text" }
+#'UNTERM French Formal': { range: "Text" }
+#'UNTERM Russian Short': { range: "Text" }
+#M49: { range: "Text" }
+#'Sub-region Code': { range: "Text" }
+#'Region Code': { range: "Text" }
+#official_name_ar: { range: "Text" }
+#ISO4217-currency_minor_unit: { range: "Text" }
+#'UNTERM Arabic Formal': { range: "Text" }
+#'UNTERM Chinese Short': { range: "Text" }
+#'Land Locked Developing Countries (LLDC)': { range: "Text" }
+#'Intermediate Region Name': { range: "Text" }
+#official_name_es: { range: "Text" }
+#'UNTERM English Formal': { range: "Text" }
+#official_name_cn: { range: "Text" }
+#official_name_en: { range: "Text" }
+#ISO4217-currency_country_name: { range: "Text" }
+#'Least Developed Countries (LDC)': { range: "Text" }
+#'Region Name': { range: "Text" }
+#'UNTERM Arabic Short': { range: "Text" }
+#'Sub-region Name': { range: "Text" }
+#official_name_ru: { range: "Text" }
+#'Global Name': { range: "Text" }
+#Capital: { range: "Text" }
+#Continent: { range: "Text" }
+#TLD: { range: "Text" }
+#Languages: { range: "Text" }
+#'Geoname ID': { range: "Text" }
+#'CLDR display name': { range: "Text" }
+#EDGAR: { range: "Text" }
+    https://www.onetcenter.org/taxonomy.html
+    https://www.bls.gov/soc/2018/soc_2018_manual.pdf
+    41-9010 Models, Demonstrators, and Product Promoters
+    This broad occupation includes the following two detailed occupations:
+    41-9011 Demonstrators and Product Promoters
+    41-9012 Models
+    41-9011 Demonstrators and Product Promoters
+    Demonstrate merchandise and answer questions for the purpose of creating public interest in buying the product.
+    May sell demonstrated merchandise
+    Illustrative examples: Home Demonstrator, In-Store Demonstrator
+    41-9012 Models
+    Model garments or other apparel and accessories for prospective buyers at fashion shows, private showings, or
+    retail establishments. May pose for photos to be used in magazines or advertisements. May pose as subject for
+    paintings, sculptures, and other types of artistic expression.
+    Illustrative examples: Fashion Model, Hand Model, Photographer's Model

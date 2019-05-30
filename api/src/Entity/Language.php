@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Language Documentation on Schema.org
  *
+ * @author Maxim Yalagin <yalagin@gmail.com>
+ *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Language")
  */
@@ -39,10 +41,18 @@ class Language
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(length=2)
      * @Assert\NotNull
      */
     private $alpha2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(length=3)
+     * @Assert\NotNull
+     */
+    private $alpha3;
 
     public function setId(string $id): void
     {
@@ -72,5 +82,15 @@ class Language
     public function getAlpha2(): string
     {
         return $this->alpha2;
+    }
+
+    public function setAlpha3(string $alpha3): void
+    {
+        $this->alpha3 = $alpha3;
+    }
+
+    public function getAlpha3(): string
+    {
+        return $this->alpha3;
     }
 }

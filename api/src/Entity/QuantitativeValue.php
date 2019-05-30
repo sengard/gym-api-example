@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/QuantitativeValue Documentation on Schema.org
  *
+ * @author Maxim Yalagin <yalagin@gmail.com>
+ *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/QuantitativeValue")
  */

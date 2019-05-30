@@ -9,6 +9,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,8 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Person Documentation on Schema.org
  *
+ * @author Maxim Yalagin <yalagin@gmail.com>
+ *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Person")
+ * @UniqueEntity("telephone")
  */
 class Person
 {
@@ -88,6 +92,39 @@ class Person
     private $birthPlace;
 
     /**
+     * @var Place|null a contact location for a person's residence
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
+     * @ApiProperty(iri="http://schema.org/homeLocation")
+     */
+    private $homeLocation;
+
+    /**
+     * @var string|null the Dun & Bradstreet DUNS number for identifying an organization or business person
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @ApiProperty(iri="http://schema.org/duns")
+     */
+    private $dun;
+
+    /**
+     * @var Collection<Person>|null the most generic uni-directional social relation
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Person")
+     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
+     * @ApiProperty(iri="http://schema.org/follows")
+     */
+    private $follows;
+
+    /**
+     * @var Person|null the most generic bi-directional social/work relation
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Person")
+     * @ApiProperty(iri="http://schema.org/knows")
+     */
+    private $know;
+
+    /**
      * @var string|null Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.
      *
      * @ORM\Column(type="text", nullable=true)
@@ -111,14 +148,6 @@ class Person
      * @ApiProperty(iri="http://schema.org/height")
      */
     private $height;
-
-    /**
-     * @var Place|null a contact location for a person's residence
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
-     * @ApiProperty(iri="http://schema.org/homeLocation")
-     */
-    private $homeLocation;
 
     /**
      * @var string|null the job title of the person (for example, Financial Manager)
@@ -146,7 +175,7 @@ class Person
     /**
      * @var string|null the telephone number
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true, unique=true)
      * @ApiProperty(iri="http://schema.org/telephone")
      */
     private $telephone;
@@ -169,6 +198,7 @@ class Person
 
     public function __construct()
     {
+        $this->follows = new ArrayCollection();
         $this->knowsLanguages = new ArrayCollection();
     }
 
@@ -252,6 +282,51 @@ class Person
         return $this->birthPlace;
     }
 
+    public function setHomeLocation(?Place $homeLocation): void
+    {
+        $this->homeLocation = $homeLocation;
+    }
+
+    public function getHomeLocation(): ?Place
+    {
+        return $this->homeLocation;
+    }
+
+    public function setDun(?string $dun): void
+    {
+        $this->dun = $dun;
+    }
+
+    public function getDun(): ?string
+    {
+        return $this->dun;
+    }
+
+    public function addFollow(Person $follow): void
+    {
+        $this->follows[] = $follow;
+    }
+
+    public function removeFollow(Person $follow): void
+    {
+        $this->follows->removeElement($follow);
+    }
+
+    public function getFollows(): Collection
+    {
+        return $this->follows;
+    }
+
+    public function setKnow(?Person $know): void
+    {
+        $this->know = $know;
+    }
+
+    public function getKnow(): ?Person
+    {
+        return $this->know;
+    }
+
     public function setGender(?string $gender): void
     {
         $this->gender = $gender;
@@ -280,16 +355,6 @@ class Person
     public function getHeight(): ?QuantitativeValue
     {
         return $this->height;
-    }
-
-    public function setHomeLocation(?Place $homeLocation): void
-    {
-        $this->homeLocation = $homeLocation;
-    }
-
-    public function getHomeLocation(): ?Place
-    {
-        return $this->homeLocation;
     }
 
     public function setJobTitle(?string $jobTitle): void

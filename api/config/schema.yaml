@@ -1,10 +1,8 @@
+author:  Maxim Yalagin <yalagin@gmail.com>
 id:
     generationStrategy: uuid
     writable: true
-validator:
-    assertType: true
 types:
-    # Parent class of Person
     Thing:
         properties:
             name: ~
@@ -14,28 +12,28 @@ types:
             givenName: ~
             additionalName: ~
             address: { range: "PostalAddress" }
-            affiliation: ~
+            affiliation: { range: "Organization" } 
             birthDate: ~
-            birthPlace: ~
+            birthPlace: { range: "Place" }
+            homeLocation: { range: "Place" }
+            duns: ~
+            follows:  { range: "Person" }
+            knows:  { range: "Person" }
             gender: ~
             hasOccupation: { range: "Occupation" }
             height: { range: "QuantitativeValue" }
-            homeLocation: { range: "Place" }
-            #todo: maybe fix it to user Type with constraints
             jobTitle: ~
             knowsLanguage: 
                 range: "Language"
                 cardinality: "(*..*)"
             nationality: { range: "Country" }
-            telephone: ~
+            telephone: 
+                unique: true
             weight: { range: "QuantitativeValue" }
             worksFor: { range: "Organization" }
     PostalAddress:
-        # Disable the generation of the class hierarchy for this type
-#        parent: false
         properties:
-            # Force the type of the addressCountry property to text
-            addressCountry: { range: "Text" }
+            addressCountry: { range: "Country" }
             addressLocality: ~
             addressRegion: ~
             postOfficeBoxNumber: ~
@@ -54,25 +52,49 @@ types:
     Organization:
         properties:
             name: ~
-    Occupation:
-        properties:
-            name: ~
+#            address: { range: "PostalAddress" }
+#            aggregateRating: { range: "AggregateRating" }
+#            alumni: { range: "Person" }
+#            areaServed: { range: "AdministrativeArea" }
+#            awards: ~
+#            contactPoints: { range: "ContactPoint" }
+#            department: { range: "Organization" }
+#            dissolutionDate: ~
+#            email: ~
+#            employees: { range: "Person" }
+#            founders: { range: "Person" }
+#            foundingDate: ~
+#            globalLocationNumber: ~
+#            hasOfferCatalog: { range: "OfferCatalog" }
+#            knowsLanguages: { range: "Language" }
+#            knowsAbout: { range: "Thing" }
+#            location: { range: "Place" }
+#            logo: { range: "ImageObject" }
+#            members:  { range: "Person" }
+#            naics:  { range: "Text" }
+#            review:  { range: "Review" }
+#            slogan: ~
+#            telephone: ~
+#            legalName: ~
+#            leiCode: ~
+#            isicV4: ~
+#            vatID: ~
+#            duns: ~
     Language:
         properties:
             name: ~
-            alpha2: { range: "Text" }
-            alpha3: { range: "Text" }
-    
-
-
-#            "jobLocation": {
-#                "@type": "Place",
-#                "address": {
-#                    "@type": "PostalAddress",
-#                    "streetAddress": "555 Clancy St",
-#                    "addressLocality": "Detroit",
-#                    "addressRegion": "MI",
-#                    "postalCode": "48201",
-#                    "addressCountry": "US"
-#                }
-#            }
+            alpha2:
+                range: "Text"
+                ormColumn: "length=2"
+            alpha3: 
+                range: "Text"
+                ormColumn: "length=3"
+    Occupation:
+        properties:
+            name: ~
+            #            occupationalCategory: ~
+            #            responsibilities: ~
+            #            skills: ~
+            sameAs: ~
+#            estimatedSalary: ~
+#            occupationLocation: ~
