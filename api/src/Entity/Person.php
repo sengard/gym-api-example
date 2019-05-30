@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(iri="http://schema.org/Person")
  * @UniqueEntity("telephone")
  */
-class Person
+class Person extends Thing
 {
     /**
      * @var string

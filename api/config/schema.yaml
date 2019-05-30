@@ -2,11 +2,13 @@ author:  Maxim Yalagin <yalagin@gmail.com>
 id:
     generationStrategy: uuid
     writable: true
+#useInterface:         true
 types:
     Thing:
         properties:
             name: ~
     Person:
+        parent: Thing
         properties:
             familyName: ~
             givenName: ~
@@ -50,36 +52,36 @@ types:
         properties:
             name: ~
     Organization:
+        parent: Thing
         properties:
-            name: ~
-#            address: { range: "PostalAddress" }
-#            aggregateRating: { range: "AggregateRating" }
-#            alumni: { range: "Person" }
+            address: { range: "PostalAddress" }
+            aggregateRating: { range: "AggregateRating" }
+            alumni: { range: "Person" }
 #            areaServed: { range: "AdministrativeArea" }
-#            awards: ~
+            awards: ~
 #            contactPoints: { range: "ContactPoint" }
 #            department: { range: "Organization" }
-#            dissolutionDate: ~
-#            email: ~
-#            employees: { range: "Person" }
-#            founders: { range: "Person" }
-#            foundingDate: ~
-#            globalLocationNumber: ~
+            dissolutionDate: ~
+            email: ~
+            employees: { range: "Person" }
+            founders: { range: "Person" }
+            foundingDate: ~
+            globalLocationNumber: ~
 #            hasOfferCatalog: { range: "OfferCatalog" }
-#            knowsLanguages: { range: "Language" }
+            knowsLanguages: { range: "Language" }
 #            knowsAbout: { range: "Thing" }
-#            location: { range: "Place" }
+            location: { range: "Place" }
 #            logo: { range: "ImageObject" }
-#            members:  { range: "Person" }
-#            naics:  { range: "Text" }
+            members:  { range: "Person" }
+            naics:  { range: "Text" }
 #            review:  { range: "Review" }
 #            slogan: ~
-#            telephone: ~
-#            legalName: ~
-#            leiCode: ~
-#            isicV4: ~
-#            vatID: ~
-#            duns: ~
+            telephone: ~
+            legalName: ~
+            leiCode: ~
+            isicV4: ~
+            vatID: ~
+            duns: ~
     Language:
         properties:
             name: ~
@@ -98,3 +100,24 @@ types:
             sameAs: ~
 #            estimatedSalary: ~
 #            occupationLocation: ~
+    AggregateRating:
+        properties:
+            itemReviewed: ~
+            ratingCount:
+                range: "Number"
+            reviewCount:
+                range: "Number"
+            ratingValue:
+                range: "Number"
+    Rating:
+        properties:
+            author: { range: "Person" }
+            ratingValue: {range: "Number"}
+    Review:
+        properties:
+            author: { range: "Person" }
+            itemReviewed: { range: "Person" }
+            name: ~
+            reviewBody: ~
+            reviewRating: { range: "Rating" }
+            publisher: { range: "Organization" } #"@type": "Organization", "name": "Washington Times"
