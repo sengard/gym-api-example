@@ -2,7 +2,15 @@ author:  Maxim Yalagin <yalagin@gmail.com>
 id:
     generationStrategy: uuid
     writable: true
-#useInterface:         true
+rdfa:
+    #-  uri: "https://schema.org/docs/schema_org_rdfa.html" # Current version of Schema.org
+    #    format: rdfa
+    #-   uri: "https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/ext/auto/auto.rdfa" # Experimental version of Schema.org extension: AUTO
+    #    format: rdfa
+    -   uri: "https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.7/all-layers.rdf" # Current version of Schema.org + all extensions
+        format: rdf
+    -   uri: "https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/schema.rdfa" # Experimental version of Schema.org
+        format: rdfa
 types:
     Thing:
         properties:
@@ -39,8 +47,8 @@ types:
             streetAddress: ~
     QuantitativeValue:
         properties:
-            value: ~
-            unitCode: ~
+            value: { range: "Number" }
+            unitCode: { range: "Text"}
     Place:
         properties:
             address: { range: "PostalAddress" }
@@ -106,11 +114,15 @@ types:
             workload: {range: "QuantitativeValue"} # calories 
             #there also have CreativeWork for owner who created that exercise 
             associatedAnatomy: {range: "AnatomicalStructure"}
-#            category: 
-#                range: "PhysicalActivityCategory" # enum
+            category: 
+                range: "PhysicalActivityCategory" # enum
     ActionStatusType:
         properties:
             supersededBy: {range: "ExerciseAction"}
+    PhysicalActivityCategory:
+#        vocabularyNamespace: 'http://health-lifesci.schema.org/'
+        properties:
+            supersededBy: {range: "ExercisePlan"}
     AnatomicalStructure:
         parent: AbstractThing
         properties:

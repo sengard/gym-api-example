@@ -29,6 +29,15 @@ class PhysicalActivityCategory
      */
     private $id;
 
+    /**
+     * @var ExercisePlan
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\ExercisePlan")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     */
+    private $supersededBy;
+
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -37,5 +46,15 @@ class PhysicalActivityCategory
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function setSupersededBy(ExercisePlan $supersededBy): void
+    {
+        $this->supersededBy = $supersededBy;
+    }
+
+    public function getSupersededBy(): ExercisePlan
+    {
+        return $this->supersededBy;
     }
 }

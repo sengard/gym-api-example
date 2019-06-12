@@ -107,11 +107,10 @@ class Person
     private $height;
 
     /**
-     * @var Language
+     * @var Language|null Of a [Person](http://schema.org/Person), and less typically of an [Organization](http://schema.org/Organization), to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Language")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     * @ApiProperty(iri="http://schema.org/knowsLanguage")
      */
     private $knowsLanguage;
 
@@ -241,12 +240,12 @@ class Person
         return $this->height;
     }
 
-    public function setKnowsLanguage(Language $knowsLanguage): void
+    public function setKnowsLanguage(?Language $knowsLanguage): void
     {
         $this->knowsLanguage = $knowsLanguage;
     }
 
-    public function getKnowsLanguage(): Language
+    public function getKnowsLanguage(): ?Language
     {
         return $this->knowsLanguage;
     }

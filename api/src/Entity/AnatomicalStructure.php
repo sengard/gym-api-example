@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * The most generic type of item.
+ * Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.
  *
- * @see http://schema.org/Thing Documentation on Schema.org
+ * @see http://schema.org/AnatomicalStructure Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ApiResource(iri="http://schema.org/AnatomicalStructure")
  */
 class AnatomicalStructure extends AbstractThing
 {
@@ -30,13 +32,16 @@ class AnatomicalStructure extends AbstractThing
     private $id;
 
     /**
-     * @var ExercisePlan
+     * @var Collection<ExercisePlan>|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\ExercisePlan")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
+     * @ORM\ManyToMany(targetEntity="App\Entity\ExercisePlan")
      */
-    private $ExercisePlan;
+    private $ExercisePlans;
+
+    public function __construct()
+    {
+        $this->ExercisePlans = new ArrayCollection();
+    }
 
     public function setId(string $id): void
     {
@@ -48,13 +53,18 @@ class AnatomicalStructure extends AbstractThing
         return $this->id;
     }
 
-    public function setExercisePlan(ExercisePlan $ExercisePlan): void
+    public function addExercisePlan(ExercisePlan $ExercisePlan): void
     {
-        $this->ExercisePlan = $ExercisePlan;
+        $this->ExercisePlans[] = $ExercisePlan;
     }
 
-    public function getExercisePlan(): ExercisePlan
+    public function removeExercisePlan(ExercisePlan $ExercisePlan): void
     {
-        return $this->ExercisePlan;
+        $this->ExercisePlans->removeElement($ExercisePlan);
+    }
+
+    public function getExercisePlans(): Collection
+    {
+        return $this->ExercisePlans;
     }
 }

@@ -31,7 +31,7 @@ class PostalAddress
     private $id;
 
     /**
-     * @var Country|null The country. For example, USA. You can also provide the two-letter \[ISO 3166-1 alpha-2 country code\](http://en.wikipedia.org/wiki/ISO\_3166-1).
+     * @var Country|null The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).
      *
      * @ORM\OneToOne(targetEntity="App\Entity\Country")
      * @ApiProperty(iri="http://schema.org/addressCountry")
@@ -39,7 +39,7 @@ class PostalAddress
     private $addressCountry;
 
     /**
-     * @var string|null The locality. For example, Mountain View.
+     * @var string|null The locality in which the street address is, and which is in the region. For example, Mountain View.
      *
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/addressLocality")
@@ -47,7 +47,7 @@ class PostalAddress
     private $addressLocality;
 
     /**
-     * @var string|null The region. For example, CA.
+     * @var string|null The region in which the locality is, and which is in the country. For example, California or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country)
      *
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/addressRegion")
