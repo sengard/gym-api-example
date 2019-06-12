@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Thing
+class Thing extends AbstractDate
 {
     /**
      * @var string
@@ -39,11 +39,10 @@ class Thing
     private $name;
 
     /**
-     * @var string|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
+     * @var MediaObject|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
      * @ApiProperty(iri="http://schema.org/image")
-     * @Assert\Url
      */
     private $image;
 
@@ -75,12 +74,12 @@ class Thing
         return $this->name;
     }
 
-    public function setImage(?string $image): void
+    public function setImage(?MediaObject $image): void
     {
         $this->image = $image;
     }
 
-    public function getImage(): ?string
+    public function getImage(): ?MediaObject
     {
         return $this->image;
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Enum;
 
-use App\Entity\ExerciseAction;
 use MyCLabs\Enum\Enum;
 
 /**

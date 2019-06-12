@@ -12,17 +12,25 @@ rdfa:
     -   uri: "https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/schema.rdfa" # Experimental version of Schema.org
         format: rdfa
 types:
-    Thing:
+    AbstractDate:
+        abstract: true
         properties:
-            name: ~
-            image: ~
-            description: ~
+            CreatedAt: { range: "Date"}
+            UpdatedAt: { range: "Date"}
     AbstractThing:
+        parent: AbstractDate
         properties:
             name: ~
-            image: ~
+            image: { range: "MediaObject" }
+            description: ~
+    Thing:
+        parent: AbstractDate
+        properties:
+            name: ~
+            image: { range: "MediaObject" }
             description: ~
     Person:
+        parent: AbstractDate
         properties:
             familyName: ~
             givenName: ~
@@ -38,6 +46,7 @@ types:
             nationality: { range: "Country" }
             weight: { range: "QuantitativeValue" }
     PostalAddress:
+        parent: AbstractDate
         properties:
             addressCountry: { range: "Country" }
             addressLocality: ~
@@ -46,13 +55,16 @@ types:
             postalCode: ~
             streetAddress: ~
     QuantitativeValue:
+        parent: AbstractDate
         properties:
             value: { range: "Number" }
             unitCode: { range: "Text"}
     Place:
+        parent: AbstractDate
         properties:
             address: { range: "PostalAddress" }
     Country:
+        parent: AbstractDate
         properties:
             name: ~
     Language:
@@ -65,6 +77,7 @@ types:
                 range: "Text"
                 ormColumn: "length=3"
     AggregateRating:
+        parent: AbstractDate
         properties:
             itemReviewed:
                 range: "Thing"
@@ -79,6 +92,7 @@ types:
             author: { range: "Person" }
             ratingValue: {range: "Number"}
     Review:
+        parent: AbstractDate
         properties:
             author: { range: "Person" }
             itemReviewed: { range: "Person" }
@@ -87,6 +101,7 @@ types:
             reviewRating: { range: "Rating" }
             publisher: { range: "Person" } #"@type": "Organization", "name": "Washington Times"
     ExerciseAction:  # described in past tens
+        parent: AbstractDate
         properties:
             exercisePlan:  
                 range: "ExercisePlan"
@@ -103,6 +118,7 @@ types:
             result: {range: "Thing"} #how many reps
 #            target: {range: "EntryPoint ", ormColumn: {options={"comment" = "how many reps"}}}
     ExercisePlan:  #ecxercices
+        parent: AbstractDate
         properties:
             activityDuration: {range: "QuantitativeValue"} #  {range: "Text"}
             activityFrequency: {range: "QuantitativeValue"} # {range: "Text"} How often 
@@ -120,13 +136,17 @@ types:
         properties:
             supersededBy: {range: "ExerciseAction"}
     PhysicalActivityCategory:
-#        vocabularyNamespace: 'http://health-lifesci.schema.org/'
         properties:
             supersededBy: {range: "ExercisePlan"}
     AnatomicalStructure:
         parent: AbstractThing
         properties:
             ExercisePlans: {range: "ExercisePlan", cardinality: "(*..*)"}
-        
-            
-                
+    MediaObject:
+        parent: AbstractDate
+        properties:
+            author: { range: "Person"}
+            contentUrl: { range: "URL"}
+            datePublished: ~
+            description: ~
+            name: ~ 

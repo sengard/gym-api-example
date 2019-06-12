@@ -7,7 +7,6 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * The most generic type of item.
@@ -19,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\MappedSuperclass
  * @ApiResource(iri="http://schema.org/Thing")
  */
-abstract class AbstractThing
+abstract class AbstractThing extends AbstractDate
 {
     /**
      * @var string|null the name of the item
@@ -30,11 +29,10 @@ abstract class AbstractThing
     private $name;
 
     /**
-     * @var string|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
+     * @var MediaObject|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
      * @ApiProperty(iri="http://schema.org/image")
-     * @Assert\Url
      */
     private $image;
 
@@ -56,12 +54,12 @@ abstract class AbstractThing
         return $this->name;
     }
 
-    public function setImage(?string $image): void
+    public function setImage(?MediaObject $image): void
     {
         $this->image = $image;
     }
 
-    public function getImage(): ?string
+    public function getImage(): ?MediaObject
     {
         return $this->image;
     }

@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/PostalAddress")
  */
-class PostalAddress
+class PostalAddress extends AbstractDate
 {
     /**
      * @var string

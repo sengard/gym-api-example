@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/ExercisePlan")
  */
-class ExercisePlan
+class ExercisePlan extends AbstractDate
 {
     /**
      * @var string
