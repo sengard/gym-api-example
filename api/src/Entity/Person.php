@@ -9,7 +9,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,9 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Person")
- * @UniqueEntity("telephone")
  */
-class Person extends Thing
+class Person
 {
     /**
      * @var string
@@ -67,14 +65,6 @@ class Person extends Thing
     private $address;
 
     /**
-     * @var Organization|null An organization that this person is affiliated with. For example, a school/university, a club, or a team.
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
-     * @ApiProperty(iri="http://schema.org/affiliation")
-     */
-    private $affiliation;
-
-    /**
      * @var \DateTimeInterface|null date of birth
      *
      * @ORM\Column(type="date", nullable=true)
@@ -82,30 +72,6 @@ class Person extends Thing
      * @Assert\Date
      */
     private $birthDate;
-
-    /**
-     * @var Place|null the place where the person was born
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Place")
-     * @ApiProperty(iri="http://schema.org/birthPlace")
-     */
-    private $birthPlace;
-
-    /**
-     * @var Place|null a contact location for a person's residence
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Place")
-     * @ApiProperty(iri="http://schema.org/homeLocation")
-     */
-    private $homeLocation;
-
-    /**
-     * @var string|null the Dun & Bradstreet DUNS number for identifying an organization or business person
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @ApiProperty(iri="http://schema.org/duns")
-     */
-    private $dun;
 
     /**
      * @var Collection<Person>|null the most generic uni-directional social relation
@@ -133,15 +99,6 @@ class Person extends Thing
     private $gender;
 
     /**
-     * @var Occupation
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Occupation")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
-     */
-    private $hasOccupation;
-
-    /**
      * @var QuantitativeValue|null the height of the item
      *
      * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
@@ -150,19 +107,13 @@ class Person extends Thing
     private $height;
 
     /**
-     * @var string|null the job title of the person (for example, Financial Manager)
+     * @var Language
      *
-     * @ORM\Column(type="text", nullable=true)
-     * @ApiProperty(iri="http://schema.org/jobTitle")
+     * @ORM\OneToOne(targetEntity="App\Entity\Language")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
-    private $jobTitle;
-
-    /**
-     * @var Collection<Language>|null
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Language")
-     */
-    private $knowsLanguages;
+    private $knowsLanguage;
 
     /**
      * @var Country|null nationality of the person
@@ -173,14 +124,6 @@ class Person extends Thing
     private $nationality;
 
     /**
-     * @var string|null the telephone number
-     *
-     * @ORM\Column(type="text", nullable=true, unique=true)
-     * @ApiProperty(iri="http://schema.org/telephone")
-     */
-    private $telephone;
-
-    /**
      * @var QuantitativeValue|null the weight of the product or person
      *
      * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
@@ -188,18 +131,9 @@ class Person extends Thing
      */
     private $weight;
 
-    /**
-     * @var Organization|null organizations that the person works for
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
-     * @ApiProperty(iri="http://schema.org/worksFor")
-     */
-    private $worksFor;
-
     public function __construct()
     {
         $this->follows = new ArrayCollection();
-        $this->knowsLanguages = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -252,16 +186,6 @@ class Person extends Thing
         return $this->address;
     }
 
-    public function setAffiliation(?Organization $affiliation): void
-    {
-        $this->affiliation = $affiliation;
-    }
-
-    public function getAffiliation(): ?Organization
-    {
-        return $this->affiliation;
-    }
-
     public function setBirthDate(?\DateTimeInterface $birthDate): void
     {
         $this->birthDate = $birthDate;
@@ -270,36 +194,6 @@ class Person extends Thing
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birthDate;
-    }
-
-    public function setBirthPlace(?Place $birthPlace): void
-    {
-        $this->birthPlace = $birthPlace;
-    }
-
-    public function getBirthPlace(): ?Place
-    {
-        return $this->birthPlace;
-    }
-
-    public function setHomeLocation(?Place $homeLocation): void
-    {
-        $this->homeLocation = $homeLocation;
-    }
-
-    public function getHomeLocation(): ?Place
-    {
-        return $this->homeLocation;
-    }
-
-    public function setDun(?string $dun): void
-    {
-        $this->dun = $dun;
-    }
-
-    public function getDun(): ?string
-    {
-        return $this->dun;
     }
 
     public function addFollow(Person $follow): void
@@ -337,16 +231,6 @@ class Person extends Thing
         return $this->gender;
     }
 
-    public function setHasOccupation(Occupation $hasOccupation): void
-    {
-        $this->hasOccupation = $hasOccupation;
-    }
-
-    public function getHasOccupation(): Occupation
-    {
-        return $this->hasOccupation;
-    }
-
     public function setHeight(?QuantitativeValue $height): void
     {
         $this->height = $height;
@@ -357,29 +241,14 @@ class Person extends Thing
         return $this->height;
     }
 
-    public function setJobTitle(?string $jobTitle): void
+    public function setKnowsLanguage(Language $knowsLanguage): void
     {
-        $this->jobTitle = $jobTitle;
+        $this->knowsLanguage = $knowsLanguage;
     }
 
-    public function getJobTitle(): ?string
+    public function getKnowsLanguage(): Language
     {
-        return $this->jobTitle;
-    }
-
-    public function addKnowsLanguage(Language $knowsLanguage): void
-    {
-        $this->knowsLanguages[] = $knowsLanguage;
-    }
-
-    public function removeKnowsLanguage(Language $knowsLanguage): void
-    {
-        $this->knowsLanguages->removeElement($knowsLanguage);
-    }
-
-    public function getKnowsLanguages(): Collection
-    {
-        return $this->knowsLanguages;
+        return $this->knowsLanguage;
     }
 
     public function setNationality(?Country $nationality): void
@@ -392,16 +261,6 @@ class Person extends Thing
         return $this->nationality;
     }
 
-    public function setTelephone(?string $telephone): void
-    {
-        $this->telephone = $telephone;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
     public function setWeight(?QuantitativeValue $weight): void
     {
         $this->weight = $weight;
@@ -410,15 +269,5 @@ class Person extends Thing
     public function getWeight(): ?QuantitativeValue
     {
         return $this->weight;
-    }
-
-    public function setWorksFor(?Organization $worksFor): void
-    {
-        $this->worksFor = $worksFor;
-    }
-
-    public function getWorksFor(): ?Organization
-    {
-        return $this->worksFor;
     }
 }

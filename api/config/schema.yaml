@@ -7,8 +7,14 @@ types:
     Thing:
         properties:
             name: ~
+            image: ~
+            description: ~
+    AbstractThing:
+        properties:
+            name: ~
+            image: ~
+            description: ~
     Person:
-        parent: Thing
         properties:
             familyName: ~
             givenName: ~
@@ -52,7 +58,8 @@ types:
                 ormColumn: "length=3"
     AggregateRating:
         properties:
-            itemReviewed: ~
+            itemReviewed:
+                range: "Thing"
             ratingCount:
                 range: "Number"
             reviewCount:
@@ -71,21 +78,43 @@ types:
             reviewBody: ~
             reviewRating: { range: "Rating" }
             publisher: { range: "Person" } #"@type": "Organization", "name": "Washington Times"
-    ExerciseAction:
+    ExerciseAction:  # described in past tens
         properties:
-            exercisePlan: 
+            exercisePlan:  
                 range: "ExercisePlan"
-            exerciseType: ~
-            sportsEvent: 
-                range: "SportsEvent"
+            exerciseType: {range: "Text"} # reserved for name 
             actionStatus: 
                 range: "ActionStatusType"
             agent:
-                range: "Person" #who did it 
+                range: "Person" 
             endTime: ~
             startTime: ~
             error: {range: "Thing"} # failed 
-            instrument: {range: "Thing"} # part of body
-            object: {range: "Thing"} #equipment
-            result: {range: "Thing"} #complited
-            target: {range: "EntryPoint "} #how many reps
+            instrument: {range: "Thing"} #equipment
+            object: {range: "Thing"} # part of body 
+            result: {range: "Thing"} #how many reps
+#            target: {range: "EntryPoint ", ormColumn: {options={"comment" = "how many reps"}}}
+    ExercisePlan:  #ecxercices
+        properties:
+            activityDuration: {range: "QuantitativeValue"} #  {range: "Text"}
+            activityFrequency: {range: "QuantitativeValue"} # {range: "Text"} How often 
+            additionalVariable: {range: "Text"}
+            exerciseType: {range: "Text"}
+            intensity: {range: "QuantitativeValue"} # heart beats 
+            repetitions: {range: "Number"}
+            restPeriods: {range: "QuantitativeValue"} # QualitativeValue  or Text 
+            workload: {range: "QuantitativeValue"} # calories 
+            #there also have CreativeWork for owner who created that exercise 
+            associatedAnatomy: {range: "AnatomicalStructure"}
+#            category: 
+#                range: "PhysicalActivityCategory" # enum
+    ActionStatusType:
+        properties:
+            supersededBy: {range: "ExerciseAction"}
+    AnatomicalStructure:
+        parent: AbstractThing
+        properties:
+            ExercisePlans: {range: "ExercisePlan", cardinality: "(*..*)"}
+        
+            
+                

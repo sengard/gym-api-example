@@ -16,20 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\MappedSuperclass
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Thing
+abstract class AbstractThing
 {
-    /**
-     * @var string
-     *
-     * @ORM\Id
-     * @ORM\Column(type="guid")
-     * @Assert\Uuid
-     */
-    private $id;
-
     /**
      * @var string|null the name of the item
      *
@@ -54,16 +45,6 @@ class Thing
      * @ApiProperty(iri="http://schema.org/description")
      */
     private $description;
-
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
 
     public function setName(?string $name): void
     {

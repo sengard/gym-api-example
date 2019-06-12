@@ -39,9 +39,9 @@ class Rating
     private $author;
 
     /**
-     * @var string|null the rating for the content
+     * @var float|null the rating for the content
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @ApiProperty(iri="http://schema.org/ratingValue")
      */
     private $ratingValue;
@@ -66,12 +66,18 @@ class Rating
         return $this->author;
     }
 
-    public function setRatingValue(?string $ratingValue): void
+    /**
+     * @param float|null $ratingValue
+     */
+    public function setRatingValue($ratingValue): void
     {
         $this->ratingValue = $ratingValue;
     }
 
-    public function getRatingValue(): ?string
+    /**
+     * @return float|null
+     */
+    public function getRatingValue()
     {
         return $this->ratingValue;
     }

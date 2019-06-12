@@ -31,17 +31,17 @@ class Review
     private $id;
 
     /**
-     * @var Thing|null The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
+     * @var Person|null The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Thing")
+     * @ORM\OneToOne(targetEntity="App\Entity\Person")
      * @ApiProperty(iri="http://schema.org/author")
      */
     private $author;
 
     /**
-     * @var Thing|null the item that is being reviewed/rated
+     * @var Person|null the item that is being reviewed/rated
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Thing")
+     * @ORM\OneToOne(targetEntity="App\Entity\Person")
      * @ApiProperty(iri="http://schema.org/itemReviewed")
      */
     private $itemReviewed;
@@ -71,9 +71,9 @@ class Review
     private $reviewRating;
 
     /**
-     * @var Organization|null the publisher of the creative work
+     * @var Person|null the publisher of the creative work
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Organization")
+     * @ORM\OneToOne(targetEntity="App\Entity\Person")
      * @ApiProperty(iri="http://schema.org/publisher")
      */
     private $publisher;
@@ -88,22 +88,22 @@ class Review
         return $this->id;
     }
 
-    public function setAuthor(?Thing $author): void
+    public function setAuthor(?Person $author): void
     {
         $this->author = $author;
     }
 
-    public function getAuthor(): ?Thing
+    public function getAuthor(): ?Person
     {
         return $this->author;
     }
 
-    public function setItemReviewed(?Thing $itemReviewed): void
+    public function setItemReviewed(?Person $itemReviewed): void
     {
         $this->itemReviewed = $itemReviewed;
     }
 
-    public function getItemReviewed(): ?Thing
+    public function getItemReviewed(): ?Person
     {
         return $this->itemReviewed;
     }
@@ -138,12 +138,12 @@ class Review
         return $this->reviewRating;
     }
 
-    public function setPublisher(?Organization $publisher): void
+    public function setPublisher(?Person $publisher): void
     {
         $this->publisher = $publisher;
     }
 
-    public function getPublisher(): ?Organization
+    public function getPublisher(): ?Person
     {
         return $this->publisher;
     }
