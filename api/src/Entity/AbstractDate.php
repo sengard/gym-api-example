@@ -8,53 +8,68 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
- * The most generic type of item.
+ * created at updated at parent class
  *
- * @see http://schema.org/Thing Documentation on Schema.org
+ * @see http://schema.org/DateTime Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
+ * @ORM\HasLifecycleCallbacks
  * @ORM\MappedSuperclass
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ApiResource(iri="http://schema.org/DateTime")
  */
 abstract class AbstractDate
 {
     /**
      * @var \DateTimeInterface
      *
-     * @ORM\Column(type="date")
-     * @Assert\Date
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      * @Assert\NotNull
      */
-    private $CreatedAt;
+    private $createdAt;
 
     /**
      * @var \DateTimeInterface
      *
-     * @ORM\Column(type="date")
-     * @Assert\Date
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      * @Assert\NotNull
      */
-    private $UpdatedAt;
+    private $updatedAt;
 
-    public function setCreatedAt(\DateTimeInterface $CreatedAt): void
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->createdAt = $createdAt;
     }
 
     public function getCreatedAt(): \DateTimeInterface
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $UpdatedAt): void
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
-        $this->UpdatedAt = $UpdatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     public function getUpdatedAt(): \DateTimeInterface
     {
-        return $this->UpdatedAt;
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
     }
 }

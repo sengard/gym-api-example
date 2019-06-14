@@ -37,20 +37,20 @@ class ActionStatusType extends Enum
     const COMPLETED_ACTION_STATUS = 'http://schema.org/CompletedActionStatus';
 
     /**
-     * @var ExerciseAction|null Relates a term (i.e. a property, class or enumeration) to one that supersedes it.
+     * @var string|null the name of the item
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\ExerciseAction")
-     * @ApiProperty(iri="http://schema.org/supersededBy")
+     * @ORM\Column(type="text", nullable=true)
+     * @ApiProperty(iri="http://schema.org/name")
      */
-    private $supersededBy;
+    private $name;
 
-    public function setSupersededBy(?ExerciseAction $supersededBy): void
+    public function setName(?string $name): void
     {
-        $this->supersededBy = $supersededBy;
+        $this->name = $name;
     }
 
-    public function getSupersededBy(): ?ExerciseAction
+    public function getName(): ?string
     {
-        return $this->supersededBy;
+        return $this->name;
     }
 }

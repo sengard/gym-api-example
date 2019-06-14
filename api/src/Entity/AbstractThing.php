@@ -29,20 +29,20 @@ abstract class AbstractThing extends AbstractDate
     private $name;
 
     /**
-     * @var MediaObject|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
-     * @ApiProperty(iri="http://schema.org/image")
-     */
-    private $image;
-
-    /**
      * @var string|null a description of the item
      *
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/description")
      */
     private $description;
+
+    /**
+     * @var MediaObject|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
+     * @ApiProperty(iri="http://schema.org/image")
+     */
+    private $image;
 
     public function setName(?string $name): void
     {
@@ -54,16 +54,6 @@ abstract class AbstractThing extends AbstractDate
         return $this->name;
     }
 
-    public function setImage(?MediaObject $image): void
-    {
-        $this->image = $image;
-    }
-
-    public function getImage(): ?MediaObject
-    {
-        return $this->image;
-    }
-
     public function setDescription(?string $description): void
     {
         $this->description = $description;
@@ -72,5 +62,15 @@ abstract class AbstractThing extends AbstractDate
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function setImage(?MediaObject $image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
     }
 }

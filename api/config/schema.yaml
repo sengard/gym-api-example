@@ -12,17 +12,82 @@ rdfa:
     -   uri: "https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/schema.rdfa" # Experimental version of Schema.org
         format: rdfa
 types:
-    AbstractDate:
-        abstract: true
-        properties:
-            CreatedAt: { range: "Date"}
-            UpdatedAt: { range: "Date"}
-    AbstractThing:
-        parent: AbstractDate
-        properties:
-            name: ~
-            image: { range: "MediaObject" }
-            description: ~
+#    Rating:
+#        properties:
+#            author: { range: "Person" }
+#            ratingValue: {range: "Integer"}
+#    Review:
+#        parent: AbstractDate
+#        properties:
+#            author: { range: "Person" }
+#            itemReviewed: { range: "Person" }
+#            name: ~
+#            reviewBody: ~
+#            reviewRating: { range: "Rating" }
+#            publisher: { range: "Person" } #"@type": "Organization", "name": "Washington Times"
+
+
+#    ExerciseAction:  # described in past tense
+#        parent: AbstractDate
+#        properties:
+#            exercisePlan:  
+#                range: "ExercisePlan"
+#            exerciseType: {range: "Text"} # reserved for name 
+#            actionStatus: 
+#                range: "ActionStatusType"
+#            agent:
+#                range: "Person" 
+#            endTime: ~
+#            startTime: ~
+#            error: {range: "Thing"} # failed 
+#            instrument: {range: "Thing"} #equipment
+##            object: {range: "Thing"} # part of body 
+#            result: {range: "Thing"} #how many reps
+##            target: {range: "EntryPoint ", ormColumn: {options={"comment" = "how many reps"}}}
+#    ExercisePlan:  #ecxercices
+#        parent: AbstractDate
+#        properties:
+#            activityDuration: {range: "QuantitativeValue"} 
+#            activityFrequency: {range: "QuantitativeValue"}  # days
+#            additionalVariable: {range: "Text"}              # Any additional component of the exercise prescription that may need to be articulated to the patient 
+#            intensity: {range: "QuantitativeValue"}          # heart beats 
+#            repetitions: {range: "Integer"}                      
+#            restPeriods: {range: "QuantitativeValue"}      #  secounds between 
+#            workload: {range: "QuantitativeValue"}         # calories 
+#            #there also have CreativeWork for owner who created that exercise 
+#            associatedAnatomy: {range: "AnatomicalStructure"}   #what part of body is working now  many to many with degree of working ?
+#            category: 
+#                range: "PhysicalActivityCategory" # enum
+
+#    ExerciseFromAdmin:
+#        parent: AbstractThing
+#        properties:
+#            owned: {range: "Person"}
+#            associatedAnatomy: {range: "AnatomicalStructure"}   #what part of body 
+#            targetedMuscleGroup:  {range: "TargetedMuscleGroup"}
+#            otherMuscleGroups:  {range: "TargetedMuscleGroup" , cardinality: "(0..*)"}
+#            typeOfDevelopment:  {range: "TypeOfDevelopment" }
+#            mechanics: {range: "TypeOfDevelopment" }
+#            equipment: {range: "Equipment" , cardinality: "(0..*)"}
+#            difficulty: {range: "Difficulty" }
+#            isPublic: {range: "Boolean"}
+
+#    Difficulty:
+#        parent: AbstractThing
+#        properties:
+#            name: ~
+#    AnatomicalStructure:        #muscules 
+#        parent: AbstractThing
+#        properties:
+#            bodyLocation: {range: "Text"} #todo in future make  targetedMuscleGroup
+#    PhysicalActivityCategory:
+#        properties:
+#            name: {range: "Text"}
+#    AbstractDate:
+#        abstract: true
+#        properties:
+#            createdAt: { range: "DateTime"}
+#            updatedAt: { range: "DateTime"}
     Thing:
         parent: AbstractDate
         properties:
@@ -35,113 +100,31 @@ types:
             familyName: ~
             givenName: ~
             additionalName: ~
-            address: { range: "PostalAddress" }
             birthDate: ~
             follows:  { range: "Person" }
             knows:  { range: "Person" }
             gender: ~
-            height: { range: "QuantitativeValue" }
-            knowsLanguage: 
-                range: "Language"
-            nationality: { range: "Country" }
+            knowsLanguage:
+                range: "Text"
+            nationality: { range: "Text" }
             weight: { range: "QuantitativeValue" }
-    PostalAddress:
-        parent: AbstractDate
-        properties:
-            addressCountry: { range: "Country" }
-            addressLocality: ~
-            addressRegion: ~
-            postOfficeBoxNumber: ~
-            postalCode: ~
-            streetAddress: ~
+            height: { range: "QuantitativeValue" }
+            unitsOfMeasurement: { range: "Boolean" } #true for metric (kg/m) false for imperial (lbs / ft)
+            workoutPlans:
+                range: "WorkoutPlan"
+                cardinality: "(0..*)"
+        #todo add measurements and progression for that 
+
     QuantitativeValue:
         parent: AbstractDate
         properties:
             value: { range: "Number" }
             unitCode: { range: "Text"}
-    Place:
-        parent: AbstractDate
-        properties:
-            address: { range: "PostalAddress" }
-    Country:
-        parent: AbstractDate
-        properties:
-            name: ~
-    Language:
-        properties:
-            name: ~
-            alpha2:
-                range: "Text"
-                ormColumn: "length=2"
-            alpha3: 
-                range: "Text"
-                ormColumn: "length=3"
-    AggregateRating:
-        parent: AbstractDate
-        properties:
-            itemReviewed:
-                range: "Thing"
-            ratingCount:
-                range: "Number"
-            reviewCount:
-                range: "Number"
-            ratingValue:
-                range: "Number"
-    Rating:
-        properties:
-            author: { range: "Person" }
-            ratingValue: {range: "Number"}
-    Review:
-        parent: AbstractDate
-        properties:
-            author: { range: "Person" }
-            itemReviewed: { range: "Person" }
-            name: ~
-            reviewBody: ~
-            reviewRating: { range: "Rating" }
-            publisher: { range: "Person" } #"@type": "Organization", "name": "Washington Times"
-    ExerciseAction:  # described in past tens
-        parent: AbstractDate
-        properties:
-            exercisePlan:  
-                range: "ExercisePlan"
-            exerciseType: {range: "Text"} # reserved for name 
-            actionStatus: 
-                range: "ActionStatusType"
-            agent:
-                range: "Person" 
-            endTime: ~
-            startTime: ~
-            error: {range: "Thing"} # failed 
-            instrument: {range: "Thing"} #equipment
-            object: {range: "Thing"} # part of body 
-            result: {range: "Thing"} #how many reps
-#            target: {range: "EntryPoint ", ormColumn: {options={"comment" = "how many reps"}}}
-    ExercisePlan:  #ecxercices
-        parent: AbstractDate
-        properties:
-            activityDuration: {range: "QuantitativeValue"} #  {range: "Text"}
-            activityFrequency: {range: "QuantitativeValue"} # {range: "Text"} How often 
-            additionalVariable: {range: "Text"}
-            exerciseType: {range: "Text"}
-            intensity: {range: "QuantitativeValue"} # heart beats 
-            repetitions: {range: "Number"}
-            restPeriods: {range: "QuantitativeValue"} # QualitativeValue  or Text 
-            workload: {range: "QuantitativeValue"} # calories 
-            #there also have CreativeWork for owner who created that exercise 
-            associatedAnatomy: {range: "AnatomicalStructure"}
-            category: 
-                range: "PhysicalActivityCategory" # enum
+
+                
     ActionStatusType:
         properties:
-            supersededBy: {range: "ExerciseAction"}
-    PhysicalActivityCategory:
-        properties:
-            supersededBy: {range: "ExercisePlan"}
-    AnatomicalStructure:
-        parent: AbstractThing
-        properties:
-            ExercisePlans: {range: "ExercisePlan", cardinality: "(*..*)"}
+            name: {range: "Text"}
     MediaObject:
         parent: AbstractDate
         properties:
@@ -149,4 +132,54 @@ types:
             contentUrl: { range: "URL"}
             datePublished: ~
             description: ~
-            name: ~ 
+            name: ~
+            
+#    AbstractThing:
+#        parent: AbstractDate
+#        properties:
+#            name: ~
+#            description: ~
+#            image: { range: "MediaObject" }
+            
+            
+            
+    WorkoutPlan:
+        parent: AbstractThing
+        properties:
+#            author: {range: "Person"}
+            owned: {range: "Person", cardinality: "(*..1)"}
+            daysOfWorkouts:  { range: "DaysOfWorkout"}
+#            category:
+#                range: "PhysicalActivityCategory" # enum
+#            difficulty: { range: "Difficulty", nullable: true}
+            isCurrent: {range: "Boolean" }
+        
+    DaysOfWorkout:
+        parent: AbstractThing
+        properties:
+            workoutPlan:
+                range: "WorkoutPlan"
+            daysOfMonth:
+                range: "Integer"
+            daysOfWOrkoutExercise:
+                range: "DaysOfWorkoutExercise"
+                
+    DaysOfWorkoutExercise:
+        parent: AbstractDate
+        properties:
+            betweenSetsRestPeriod: { range: "Integer" }
+            AfterExerciseRestPeriod: { range: "Integer" }
+            baseReps: { range: "Integer" }
+            baseSets: { range: "Integer" }
+            order: { range: "Integer" }                   #todo count how many exercise for day +1
+            baseWeight: { range: "QuantitativeValue" }
+            DaysOfWorkout: { range: "DaysOfWorkout" }
+#            ExerciseFromAdmin: { range: "ExerciseFromAdmin" }
+            ExerciseFromUser: { range: "ExerciseFromUser" }
+
+    ExerciseFromUser:
+        parent: AbstractThing
+        properties:
+            owned: {range: "Person"}
+            isPublic: {range: "Boolean"}
+            language: {range: "Text"}

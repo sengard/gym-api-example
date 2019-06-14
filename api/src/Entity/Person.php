@@ -57,14 +57,6 @@ class Person extends AbstractDate
     private $additionalName;
 
     /**
-     * @var PostalAddress|null physical address of the item
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostalAddress")
-     * @ApiProperty(iri="http://schema.org/address")
-     */
-    private $address;
-
-    /**
      * @var \DateTimeInterface|null date of birth
      *
      * @ORM\Column(type="date", nullable=true)
@@ -99,25 +91,17 @@ class Person extends AbstractDate
     private $gender;
 
     /**
-     * @var QuantitativeValue|null the height of the item
+     * @var string|null Of a [Person](http://schema.org/Person), and less typically of an [Organization](http://schema.org/Organization), to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ApiProperty(iri="http://schema.org/height")
-     */
-    private $height;
-
-    /**
-     * @var Language|null Of a [Person](http://schema.org/Person), and less typically of an [Organization](http://schema.org/Organization), to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/knowsLanguage")
      */
     private $knowsLanguage;
 
     /**
-     * @var Country|null nationality of the person
+     * @var string|null nationality of the person
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/nationality")
      */
     private $nationality;
@@ -130,9 +114,34 @@ class Person extends AbstractDate
      */
     private $weight;
 
+    /**
+     * @var QuantitativeValue|null the height of the item
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ApiProperty(iri="http://schema.org/height")
+     */
+    private $height;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     * @Assert\NotNull
+     */
+    private $unitsOfMeasurement;
+
+    /**
+     * @var Collection<WorkoutPlan>|null
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\WorkoutPlan")
+     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
+     */
+    private $workoutPlans;
+
     public function __construct()
     {
         $this->follows = new ArrayCollection();
+        $this->workoutPlans = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -173,16 +182,6 @@ class Person extends AbstractDate
     public function getAdditionalName(): ?string
     {
         return $this->additionalName;
-    }
-
-    public function setAddress(?PostalAddress $address): void
-    {
-        $this->address = $address;
-    }
-
-    public function getAddress(): ?PostalAddress
-    {
-        return $this->address;
     }
 
     public function setBirthDate(?\DateTimeInterface $birthDate): void
@@ -230,32 +229,22 @@ class Person extends AbstractDate
         return $this->gender;
     }
 
-    public function setHeight(?QuantitativeValue $height): void
-    {
-        $this->height = $height;
-    }
-
-    public function getHeight(): ?QuantitativeValue
-    {
-        return $this->height;
-    }
-
-    public function setKnowsLanguage(?Language $knowsLanguage): void
+    public function setKnowsLanguage(?string $knowsLanguage): void
     {
         $this->knowsLanguage = $knowsLanguage;
     }
 
-    public function getKnowsLanguage(): ?Language
+    public function getKnowsLanguage(): ?string
     {
         return $this->knowsLanguage;
     }
 
-    public function setNationality(?Country $nationality): void
+    public function setNationality(?string $nationality): void
     {
         $this->nationality = $nationality;
     }
 
-    public function getNationality(): ?Country
+    public function getNationality(): ?string
     {
         return $this->nationality;
     }
@@ -268,5 +257,40 @@ class Person extends AbstractDate
     public function getWeight(): ?QuantitativeValue
     {
         return $this->weight;
+    }
+
+    public function setHeight(?QuantitativeValue $height): void
+    {
+        $this->height = $height;
+    }
+
+    public function getHeight(): ?QuantitativeValue
+    {
+        return $this->height;
+    }
+
+    public function setUnitsOfMeasurement(bool $unitsOfMeasurement): void
+    {
+        $this->unitsOfMeasurement = $unitsOfMeasurement;
+    }
+
+    public function getUnitsOfMeasurement(): bool
+    {
+        return $this->unitsOfMeasurement;
+    }
+
+    public function addWorkoutPlan(WorkoutPlan $workoutPlan): void
+    {
+        $this->workoutPlans[] = $workoutPlan;
+    }
+
+    public function removeWorkoutPlan(WorkoutPlan $workoutPlan): void
+    {
+        $this->workoutPlans->removeElement($workoutPlan);
+    }
+
+    public function getWorkoutPlans(): Collection
+    {
+        return $this->workoutPlans;
     }
 }
