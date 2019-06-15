@@ -8,17 +8,18 @@
         "api-platform/api-pack": "^1.1",
         "guzzlehttp/guzzle": "^6.3",
         "myclabs/php-enum": "^1.7",
-        "symfony/console": "4.2.*",
-        "symfony/dotenv": "4.2.*",
+        "symfony/console": "4.3.*",
+        "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "4.2.*",
-        "symfony/intl": "4.2.*",
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/intl": "4.3.*",
         "symfony/mercure-bundle": "*",
-        "symfony/yaml": "4.2.*",
+        "symfony/yaml": "4.3.*",
         "vich/uploader-bundle": "^1.9"
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",
+        "symfony/maker-bundle": "^1.11",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {
@@ -63,7 +64,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.3.*"
         }
     }
 }
