@@ -12,8 +12,9 @@ use Symfony\Component\Validator\Constraints  as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
  * @ApiResource(iri="http://schema.org/User")
+ * @ORM\Table(name="`user`")
  */
-class User implements UserInterface
+class User extends AbstractDate implements UserInterface
 {
     /**
      * @var string

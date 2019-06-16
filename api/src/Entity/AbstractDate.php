@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,9 +23,8 @@ abstract class AbstractDate
     /**
      * @var \DateTimeInterface
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\DateTime
-     * @Assert\NotNull
      * @ApiProperty(iri="http://schema.org/DateTime")
      */
     protected $createdAt;
@@ -35,9 +32,8 @@ abstract class AbstractDate
     /**
      * @var \DateTimeInterface
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true, options={"default": "CURRENT_TIMESTAMP"} )
      * @Assert\DateTime
-     * @Assert\NotNull
      * @ApiProperty(iri="http://schema.org/DateTime")
      */
     protected $updatedAt;
@@ -47,7 +43,7 @@ abstract class AbstractDate
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt():? \DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -57,7 +53,7 @@ abstract class AbstractDate
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt():? \DateTimeInterface
     {
         return $this->updatedAt;
     }

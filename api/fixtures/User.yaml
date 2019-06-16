@@ -1,4 +1,10 @@
 App\Entity\User:
+    admin:
+        id: <uuid()>
+        email: "admin@gmail.com"
+        password: 1234567890
+        roles: ['ROLE_ADMIN']
     dummy_{1..10}:
+        id: <uuid()>
         email: <email()>
         password: <password()>
