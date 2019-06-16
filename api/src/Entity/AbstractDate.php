@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +19,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\MappedSuperclass
- * @ApiResource(iri="http://schema.org/DateTime")
  */
 abstract class AbstractDate
 {
@@ -28,8 +28,9 @@ abstract class AbstractDate
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      * @Assert\NotNull
+     * @ApiProperty(iri="http://schema.org/DateTime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTimeInterface
@@ -37,8 +38,9 @@ abstract class AbstractDate
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      * @Assert\NotNull
+     * @ApiProperty(iri="http://schema.org/DateTime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     public function setCreatedAt(\DateTimeInterface $createdAt): void
     {

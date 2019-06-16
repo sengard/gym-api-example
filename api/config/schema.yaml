@@ -88,6 +88,12 @@ types:
 #        properties:
 #            createdAt: { range: "DateTime"}
 #            updatedAt: { range: "DateTime"}
+#    AbstractThing:
+#        parent: AbstractDate
+#        properties:
+#            name: ~
+#            description: ~
+#            image: { range: "MediaObject" }
     Thing:
         parent: AbstractDate
         properties:
@@ -132,15 +138,7 @@ types:
             contentUrl: { range: "URL"}
             datePublished: ~
             description: ~
-            name: ~
-            
-#    AbstractThing:
-#        parent: AbstractDate
-#        properties:
-#            name: ~
-#            description: ~
-#            image: { range: "MediaObject" }
-            
+            name: ~            
             
             
     WorkoutPlan:

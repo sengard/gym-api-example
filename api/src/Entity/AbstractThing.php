@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,7 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\MappedSuperclass
- * @ApiResource(iri="http://schema.org/Thing")
  */
 abstract class AbstractThing extends AbstractDate
 {
@@ -26,7 +24,7 @@ abstract class AbstractThing extends AbstractDate
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/name")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string|null a description of the item
@@ -34,7 +32,7 @@ abstract class AbstractThing extends AbstractDate
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/description")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var MediaObject|null An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
@@ -42,7 +40,7 @@ abstract class AbstractThing extends AbstractDate
      * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
      * @ApiProperty(iri="http://schema.org/image")
      */
-    private $image;
+    protected $image;
 
     public function setName(?string $name): void
     {
