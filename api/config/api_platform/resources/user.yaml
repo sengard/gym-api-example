@@ -1,0 +1,15 @@
+App\Entity\User:
+    attributes:
+        normalization_context:
+            groups: ['user_read']
+    itemOperations: 
+        get: ~
+        put:
+            access_control: "object == user or is_granted('ROLE_ADMIN')"
+    collectionOperations:
+        create_user:
+            method: POST
+            path: /users
+            controller: App\Controller\RegistrationAction
+        get:
+            access_control: "is_granted('ROLE_ADMIN')"

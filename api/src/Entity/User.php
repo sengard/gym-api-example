@@ -2,20 +2,23 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints  as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
- * @ApiResource(iri="http://schema.org/User")
  * @ORM\Table(name="`user`")
  */
 class User extends AbstractDate implements UserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_CONFIGURED = 'ROLE_CONFIGURED';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
     /**
      * @var string
      *
@@ -40,8 +43,16 @@ class User extends AbstractDate implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 6, max = 4096)
      */
     private $password;
+
+//    symfony/http-client
+//    public static function loadValidatorMetadata(ClassMetadata $metadata)
+//    {
+//        $metadata->addPropertyConstraint('pass', new Assert\NotCompromisedPassword());
+//    }
 
     public function setId(string $id): void
     {

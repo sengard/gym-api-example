@@ -94,6 +94,14 @@ types:
 #            name: ~
 #            description: ~
 #            image: { range: "MediaObject" }
+#   MediaObject:
+#        parent: AbstractDate
+#        properties:
+#            author: { range: "Person"}
+#            contentUrl: { range: "URL"}
+#            datePublished: ~
+#            description: ~
+#            name: ~        
     Thing:
         parent: AbstractDate
         properties:
@@ -131,14 +139,7 @@ types:
     ActionStatusType:
         properties:
             name: {range: "Text"}
-    MediaObject:
-        parent: AbstractDate
-        properties:
-            author: { range: "Person"}
-            contentUrl: { range: "URL"}
-            datePublished: ~
-            description: ~
-            name: ~            
+#    
             
             
     WorkoutPlan:
