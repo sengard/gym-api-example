@@ -102,12 +102,12 @@ types:
 #            datePublished: ~
 #            description: ~
 #            name: ~        
-    Thing:
-        parent: AbstractDate
-        properties:
-            name: ~
-            image: { range: "MediaObject" }
-            description: ~
+#    Thing:
+#        parent: AbstractDate
+#        properties:
+#            name: ~
+#            image: { range: "MediaObject" }
+#            description: ~
     Person:
         parent: AbstractDate
         properties:

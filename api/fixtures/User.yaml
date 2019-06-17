@@ -5,6 +5,11 @@ App\Entity\User:
         #admin
         password: '\$argon2id\$v=19\$m=65536,t=6,p=1\$sd/u589RNan1NXb1/dmqNg\$yG1KOg0zX4N4oQS6T7xdE2mao6mqcbcTthFZvcmcWyE'
         roles: ['ROLE_ADMIN']
+    test:
+        id: <uuid()>
+        email: 'test@gmail.com'
+        #test
+        password: '\$argon2id\$v=19\$m=65536,t=6,p=1\$1mlSRm+fzVaiJQTSe+AcRQ\$yzTe9/QaLddyhpue9VezExlAVTtu3MYBFwn18CK9J4s'
     dummy_{1..10}:
         id: <uuid()>
         email: <email()>
