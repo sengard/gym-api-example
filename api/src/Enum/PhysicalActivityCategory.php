@@ -19,53 +19,53 @@ class PhysicalActivityCategory extends Enum
     /**
      * @var string physical activity that is engaged to help maintain posture and balance
      */
-    const BALANCE = 'http://schema.org/Balance';
+    public const BALANCE = 'http://schema.org/Balance';
 
     /**
      * @var string physical activity that is of high-intensity which utilizes the anaerobic metabolism of the body
      */
-    const ANAEROBIC_ACTIVITY = 'http://schema.org/AnaerobicActivity';
+    public const ANAEROBIC_ACTIVITY = 'http://schema.org/AnaerobicActivity';
 
     /**
      * @var string Physical activity that is engaged in to improve muscle and bone strength. Also referred to as resistance training.
      */
-    const STRENGTH_TRAINING = 'http://schema.org/StrengthTraining';
+    public const STRENGTH_TRAINING = 'http://schema.org/StrengthTraining';
 
     /**
      * @var string physical activity of relatively low intensity that depends primarily on the aerobic energy-generating process; during activity, the aerobic metabolism uses oxygen to adequately meet energy demands during exercise
      */
-    const AEROBIC_ACTIVITY = 'http://schema.org/AerobicActivity';
+    public const AEROBIC_ACTIVITY = 'http://schema.org/AerobicActivity';
 
     /**
      * @var string Any physical activity engaged in for job-related purposes. Examples may include waiting tables, maid service, carrying a mailbag, picking fruits or vegetables, construction work, etc.
      */
-    const OCCUPATIONAL_ACTIVITY = 'http://schema.org/OccupationalActivity';
+    public const OCCUPATIONAL_ACTIVITY = 'http://schema.org/OccupationalActivity';
 
     /**
      * @var string Any physical activity engaged in for recreational purposes. Examples may include ballroom dancing, roller skating, canoeing, fishing, etc.
      */
-    const LEISURE_TIME_ACTIVITY = 'http://schema.org/LeisureTimeActivity';
+    public const LEISURE_TIME_ACTIVITY = 'http://schema.org/LeisureTimeActivity';
 
     /**
      * @var string physical activity that is engaged in to improve joint and muscle flexibility
      */
-    const FLEXIBILITY = 'http://schema.org/Flexibility';
+    public const FLEXIBILITY = 'http://schema.org/Flexibility';
 
     /**
-     * @var ExercisePlan|null Relates a term (i.e. a property, class or enumeration) to one that supersedes it.
+     * @var string|null the name of the item
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\ExercisePlan")
-     * @ApiProperty(iri="http://schema.org/supersededBy")
+     * @ORM\Column(type="text",nullable=true)
+     * @ApiProperty(iri="http://schema.org/name")
      */
-    private $supersededBy;
+    private $name;
 
-    public function setSupersededBy(?ExercisePlan $supersededBy): void
+    public function setName(?string $name): void
     {
-        $this->supersededBy = $supersededBy;
+        $this->name = $name;
     }
 
-    public function getSupersededBy(): ?ExercisePlan
+    public function getName(): ?string
     {
-        return $this->supersededBy;
+        return $this->name;
     }
 }

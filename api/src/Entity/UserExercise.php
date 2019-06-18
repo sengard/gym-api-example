@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class WorkoutPlan extends AbstractThing
+class UserExercise extends AbstractThing
 {
     /**
      * @var string
@@ -32,25 +32,24 @@ class WorkoutPlan extends AbstractThing
     /**
      * @var Person|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="workoutPlans")
+     * @ORM\OneToOne(targetEntity="App\Entity\Person")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owned;
-
-    /**
-     * @var DaysOfWorkout|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\DaysOfWorkout")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $daysOfWorkout;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(type="boolean",nullable=true)
      */
-    private $isCurrent;
+    private $isPublic;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text",nullable=true)
+     */
+    private $language;
 
     public function setId(string $id): void
     {
@@ -72,23 +71,23 @@ class WorkoutPlan extends AbstractThing
         return $this->owned;
     }
 
-    public function setDaysOfWorkout(?DaysOfWorkout $daysOfWorkout): void
+    public function setIsPublic(?bool $isPublic): void
     {
-        $this->daysOfWorkout = $daysOfWorkout;
+        $this->isPublic = $isPublic;
     }
 
-    public function getDaysOfWorkout(): ?DaysOfWorkout
+    public function getIsPublic(): ?bool
     {
-        return $this->daysOfWorkout;
+        return $this->isPublic;
     }
 
-    public function setIsCurrent(?bool $isCurrent): void
+    public function setLanguage(?string $language): void
     {
-        $this->isCurrent = $isCurrent;
+        $this->language = $language;
     }
 
-    public function getIsCurrent(): ?bool
+    public function getLanguage(): ?string
     {
-        return $this->isCurrent;
+        return $this->language;
     }
 }

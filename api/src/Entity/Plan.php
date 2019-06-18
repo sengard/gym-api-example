@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class ExerciseFromUser extends AbstractThing
+class Plan extends AbstractThing
 {
     /**
      * @var string
@@ -32,24 +34,30 @@ class ExerciseFromUser extends AbstractThing
     /**
      * @var Person|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Person")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="plans")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owned;
+
+    /**
+     * @var Collection<Days>|null
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Days", mappedBy="plan")
+     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
+     */
+    private $days;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(type="boolean",nullable=true)
      */
-    private $isPublic;
+    private $isCurrent;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text",nullable=true)
-     */
-    private $language;
+    public function __construct()
+    {
+        $this->days = new ArrayCollection();
+    }
 
     public function setId(string $id): void
     {
@@ -71,23 +79,28 @@ class ExerciseFromUser extends AbstractThing
         return $this->owned;
     }
 
-    public function setIsPublic(?bool $isPublic): void
+    public function addDay(Days $day): void
     {
-        $this->isPublic = $isPublic;
+        $this->days[] = $day;
     }
 
-    public function getIsPublic(): ?bool
+    public function removeDay(Days $day): void
     {
-        return $this->isPublic;
+        $this->days->removeElement($day);
     }
 
-    public function setLanguage(?string $language): void
+    public function getDays(): Collection
     {
-        $this->language = $language;
+        return $this->days;
     }
 
-    public function getLanguage(): ?string
+    public function setIsCurrent(?bool $isCurrent): void
     {
-        return $this->language;
+        $this->isCurrent = $isCurrent;
+    }
+
+    public function getIsCurrent(): ?bool
+    {
+        return $this->isCurrent;
     }
 }

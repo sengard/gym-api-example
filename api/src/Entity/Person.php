@@ -114,17 +114,17 @@ class Person extends AbstractDate
     private $unitsOfMeasurement;
 
     /**
-     * @var Collection<WorkoutPlan>|null
+     * @var Collection<Plan>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\WorkoutPlan", mappedBy="owned")
+     * @ORM\OneToMany(targetEntity="App\Entity\Plan", mappedBy="owned")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
      */
-    private $workoutPlans;
+    private $plans;
 
     public function __construct()
     {
         $this->follows = new ArrayCollection();
-        $this->workoutPlans = new ArrayCollection();
+        $this->plans = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -242,18 +242,18 @@ class Person extends AbstractDate
         return $this->unitsOfMeasurement;
     }
 
-    public function addWorkoutPlan(WorkoutPlan $workoutPlan): void
+    public function addPlan(Plan $plan): void
     {
-        $this->workoutPlans[] = $workoutPlan;
+        $this->plans[] = $plan;
     }
 
-    public function removeWorkoutPlan(WorkoutPlan $workoutPlan): void
+    public function removePlan(Plan $plan): void
     {
-        $this->workoutPlans->removeElement($workoutPlan);
+        $this->plans->removeElement($plan);
     }
 
-    public function getWorkoutPlans(): Collection
+    public function getPlans(): Collection
     {
-        return $this->workoutPlans;
+        return $this->plans;
     }
 }

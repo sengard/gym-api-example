@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class DaysOfWorkoutExercise extends AbstractDate
+class ExerciseSetup extends AbstractDate
 {
     /**
      * @var string
@@ -73,20 +73,20 @@ class DaysOfWorkoutExercise extends AbstractDate
     private $baseWeight;
 
     /**
-     * @var DaysOfWorkout|null
+     * @var Days|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\DaysOfWorkout")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Days", inversedBy="exerciseSetup")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $DaysOfWorkout;
+    private $day;
 
     /**
-     * @var ExerciseFromUser|null
+     * @var UserExercise|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\ExerciseFromUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserExercise")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $ExerciseFromUser;
+    private $userExercise;
 
     public function setId(string $id): void
     {
@@ -158,23 +158,23 @@ class DaysOfWorkoutExercise extends AbstractDate
         return $this->baseWeight;
     }
 
-    public function setDaysOfWorkout(?DaysOfWorkout $DaysOfWorkout): void
+    public function setDay(?Days $day): void
     {
-        $this->DaysOfWorkout = $DaysOfWorkout;
+        $this->day = $day;
     }
 
-    public function getDaysOfWorkout(): ?DaysOfWorkout
+    public function getDay(): ?Days
     {
-        return $this->DaysOfWorkout;
+        return $this->day;
     }
 
-    public function setExerciseFromUser(?ExerciseFromUser $ExerciseFromUser): void
+    public function setUserExercise(?UserExercise $userExercise): void
     {
-        $this->ExerciseFromUser = $ExerciseFromUser;
+        $this->userExercise = $userExercise;
     }
 
-    public function getExerciseFromUser(): ?ExerciseFromUser
+    public function getUserExercise(): ?UserExercise
     {
-        return $this->ExerciseFromUser;
+        return $this->userExercise;
     }
 }

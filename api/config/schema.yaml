@@ -108,26 +108,6 @@ types:
 #            name: ~
 #            image: { range: "MediaObject" }
 #            description: ~
-    Person:
-        parent: AbstractDate
-        properties:
-            familyName: ~
-            givenName: ~
-            additionalName: ~
-            birthDate: ~
-            follows:  { range: "Person" }
-            knows:  { range: "Person" }
-            gender: ~
-            knowsLanguage:
-                range: "Text"
-            nationality: { range: "Text" }
-            weight: { range: "QuantitativeValue" }
-            height: { range: "QuantitativeValue" }
-            unitsOfMeasurement: { range: "Boolean" } #true for metric (kg/m) false for imperial (lbs / ft)
-            workoutPlans:
-                range: "WorkoutPlan"
-                cardinality: "(0..*)"
-        #todo add measurements and progression for that 
 
     QuantitativeValue:
         parent: AbstractDate
@@ -135,35 +115,57 @@ types:
             value: { range: "Number" }
             unitCode: { range: "Text"}
 
-                
+
     ActionStatusType:
         properties:
             name: {range: "Text"}
-#    
+        
+    Person:
+        parent: AbstractDate
+        properties:
+            familyName: ~
+            givenName: ~
+            birthDate: ~
+            follows:  { range: "Person" }
+            gender: ~
+            knowsLanguage:
+                range: "Text"
+            nationality: { range: "Text" }
+            weight: { range: "QuantitativeValue" }
+            height: { range: "QuantitativeValue" }
+            unitsOfMeasurement: { range: "Boolean" } #true for metric (kg/m) false for imperial (lbs / ft)
+            plans:
+                range: "Plan"
+                cardinality: "(0..*)"
+                mappedBy: owned
+        #todo add measurements and progression for that             
             
-            
-    WorkoutPlan:
+    Plan:
         parent: AbstractThing
         properties:
 #            author: {range: "Person"}
-            owned: {range: "Person", cardinality: "(*..1)"}
-            daysOfWorkouts:  { range: "DaysOfWorkout"}
+            owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
+            days:  { range: "Days", cardinality: "(0..*)", mappedBy: "plan" }
 #            category:
 #                range: "PhysicalActivityCategory" # enum
 #            difficulty: { range: "Difficulty", nullable: true}
             isCurrent: {range: "Boolean" }
         
-    DaysOfWorkout:
+    Days:
         parent: AbstractThing
         properties:
-            workoutPlan:
-                range: "WorkoutPlan"
-            daysOfMonth:
+            plan:
+                range: "Plan"
+                cardinality: "(*..1)"
+                inversedBy: "days"
+            dayNumber:
                 range: "Integer"
-            daysOfWOrkoutExercise:
-                range: "DaysOfWorkoutExercise"
+            exerciseSetup:
+                range: "ExerciseSetup"
+                cardinality: "(1..*)"
+                mappedBy: "days"
                 
-    DaysOfWorkoutExercise:
+    ExerciseSetup:
         parent: AbstractDate
         properties:
             betweenSetsRestPeriod: { range: "Integer" }
@@ -172,11 +174,16 @@ types:
             baseSets: { range: "Integer" }
             order: { range: "Integer" }                   #todo count how many exercise for day +1
             baseWeight: { range: "QuantitativeValue" }
-            DaysOfWorkout: { range: "DaysOfWorkout" }
-#            ExerciseFromAdmin: { range: "ExerciseFromAdmin" }
-            ExerciseFromUser: { range: "ExerciseFromUser" }
+            days:
+                range: "Days"
+                cardinality: "(*..1)"
+                inversedBy: "exerciseSetup"
+            userExercise:
+                range: "UserExercise"
+                cardinality: "(*..1)"
+#            exerciseFromAdmin: { range: "ExerciseFromAdmin" }
 
-    ExerciseFromUser:
+    UserExercise:
         parent: AbstractThing
         properties:
             owned: {range: "Person"}
