@@ -160,12 +160,12 @@ types:
                 inversedBy: "days"
             dayNumber:
                 range: "Integer"
-            exerciseSetup:
-                range: "ExerciseSetup"
+            exerciseDaySetup:
+                range: "ExerciseDaySetup"
                 cardinality: "(1..*)"
                 mappedBy: "days"
                 
-    ExerciseSetup:
+    ExerciseDaySetup:
         parent: AbstractDate
         properties:
             betweenSetsRestPeriod: { range: "Integer" }
@@ -177,13 +177,13 @@ types:
             days:
                 range: "Days"
                 cardinality: "(*..1)"
-                inversedBy: "exerciseSetup"
-            userExercise:
-                range: "UserExercise"
+                inversedBy: "exerciseDaySetup"
+            exerciseMadenByUser:
+                range: "ExerciseMadenByUser"
                 cardinality: "(*..1)"
 #            exerciseFromAdmin: { range: "ExerciseFromAdmin" }
 
-    UserExercise:
+    ExerciseMadenByUser:
         parent: AbstractThing
         properties:
             owned: {range: "Person"}

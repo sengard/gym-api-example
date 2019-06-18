@@ -47,16 +47,16 @@ class Days extends AbstractThing
     private $dayNumber;
 
     /**
-     * @var Collection<ExerciseSetup>|null
+     * @var Collection<ExerciseDaySetup>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseSetup", mappedBy="days")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseDaySetup", mappedBy="days")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})
      */
-    private $exerciseSetups;
+    private $exerciseDaySetups;
 
     public function __construct()
     {
-        $this->exerciseSetups = new ArrayCollection();
+        $this->exerciseDaySetups = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -89,18 +89,18 @@ class Days extends AbstractThing
         return $this->dayNumber;
     }
 
-    public function addExerciseSetup(ExerciseSetup $exerciseSetup): void
+    public function addExerciseDaySetup(ExerciseDaySetup $exerciseDaySetup): void
     {
-        $this->exerciseSetups[] = $exerciseSetup;
+        $this->exerciseDaySetups[] = $exerciseDaySetup;
     }
 
-    public function removeExerciseSetup(ExerciseSetup $exerciseSetup): void
+    public function removeExerciseDaySetup(ExerciseDaySetup $exerciseDaySetup): void
     {
-        $this->exerciseSetups->removeElement($exerciseSetup);
+        $this->exerciseDaySetups->removeElement($exerciseDaySetup);
     }
 
-    public function getExerciseSetups(): Collection
+    public function getExerciseDaySetups(): Collection
     {
-        return $this->exerciseSetups;
+        return $this->exerciseDaySetups;
     }
 }

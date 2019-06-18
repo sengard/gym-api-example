@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class UserExercise extends AbstractThing
+class ExerciseMadenByUser extends AbstractThing
 {
     /**
      * @var string
