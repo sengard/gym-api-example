@@ -30,28 +30,25 @@ class DaysOfWorkout extends AbstractThing
     private $id;
 
     /**
-     * @var WorkoutPlan
+     * @var WorkoutPlan|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\WorkoutPlan")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $workoutPlan;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $daysOfMonth;
 
     /**
-     * @var DaysOfWorkoutExercise
+     * @var DaysOfWorkoutExercise|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\DaysOfWorkoutExercise")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $daysOfWOrkoutExercise;
 
@@ -65,32 +62,32 @@ class DaysOfWorkout extends AbstractThing
         return $this->id;
     }
 
-    public function setWorkoutPlan(WorkoutPlan $workoutPlan): void
+    public function setWorkoutPlan(?WorkoutPlan $workoutPlan): void
     {
         $this->workoutPlan = $workoutPlan;
     }
 
-    public function getWorkoutPlan(): WorkoutPlan
+    public function getWorkoutPlan(): ?WorkoutPlan
     {
         return $this->workoutPlan;
     }
 
-    public function setDaysOfMonth(int $daysOfMonth): void
+    public function setDaysOfMonth(?int $daysOfMonth): void
     {
         $this->daysOfMonth = $daysOfMonth;
     }
 
-    public function getDaysOfMonth(): int
+    public function getDaysOfMonth(): ?int
     {
         return $this->daysOfMonth;
     }
 
-    public function setDaysOfWOrkoutExercise(DaysOfWorkoutExercise $daysOfWOrkoutExercise): void
+    public function setDaysOfWOrkoutExercise(?DaysOfWorkoutExercise $daysOfWOrkoutExercise): void
     {
         $this->daysOfWOrkoutExercise = $daysOfWOrkoutExercise;
     }
 
-    public function getDaysOfWOrkoutExercise(): DaysOfWorkoutExercise
+    public function getDaysOfWOrkoutExercise(): ?DaysOfWorkoutExercise
     {
         return $this->daysOfWOrkoutExercise;
     }

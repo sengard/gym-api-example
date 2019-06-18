@@ -32,25 +32,23 @@ class WorkoutPlan extends AbstractThing
     /**
      * @var Person|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="workoutPlans")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owned;
 
     /**
-     * @var DaysOfWorkout
+     * @var DaysOfWorkout|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\DaysOfWorkout")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $daysOfWorkout;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(type="boolean")
-     * @Assert\NotNull
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $isCurrent;
 
@@ -74,22 +72,22 @@ class WorkoutPlan extends AbstractThing
         return $this->owned;
     }
 
-    public function setDaysOfWorkout(DaysOfWorkout $daysOfWorkout): void
+    public function setDaysOfWorkout(?DaysOfWorkout $daysOfWorkout): void
     {
         $this->daysOfWorkout = $daysOfWorkout;
     }
 
-    public function getDaysOfWorkout(): DaysOfWorkout
+    public function getDaysOfWorkout(): ?DaysOfWorkout
     {
         return $this->daysOfWorkout;
     }
 
-    public function setIsCurrent(bool $isCurrent): void
+    public function setIsCurrent(?bool $isCurrent): void
     {
         $this->isCurrent = $isCurrent;
     }
 
-    public function getIsCurrent(): bool
+    public function getIsCurrent(): ?bool
     {
         return $this->isCurrent;
     }

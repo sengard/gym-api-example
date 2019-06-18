@@ -38,7 +38,7 @@ abstract class AbstractDate
      */
     protected $updatedAt;
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
+    public function setCreatedAt(? \DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -48,7 +48,7 @@ abstract class AbstractDate
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
+    public function setUpdatedAt(? \DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }

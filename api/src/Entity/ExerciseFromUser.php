@@ -30,27 +30,24 @@ class ExerciseFromUser extends AbstractThing
     private $id;
 
     /**
-     * @var Person
+     * @var Person|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\Person")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $owned;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(type="boolean")
-     * @Assert\NotNull
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $isPublic;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="text")
-     * @Assert\NotNull
+     * @ORM\Column(type="text",nullable=true)
      */
     private $language;
 
@@ -64,32 +61,32 @@ class ExerciseFromUser extends AbstractThing
         return $this->id;
     }
 
-    public function setOwned(Person $owned): void
+    public function setOwned(?Person $owned): void
     {
         $this->owned = $owned;
     }
 
-    public function getOwned(): Person
+    public function getOwned(): ?Person
     {
         return $this->owned;
     }
 
-    public function setIsPublic(bool $isPublic): void
+    public function setIsPublic(?bool $isPublic): void
     {
         $this->isPublic = $isPublic;
     }
 
-    public function getIsPublic(): bool
+    public function getIsPublic(): ?bool
     {
         return $this->isPublic;
     }
 
-    public function setLanguage(string $language): void
+    public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }
 
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }

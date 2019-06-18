@@ -30,69 +30,61 @@ class DaysOfWorkoutExercise extends AbstractDate
     private $id;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $betweenSetsRestPeriod;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $AfterExerciseRestPeriod;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $baseRep;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $baseSet;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $order;
 
     /**
-     * @var QuantitativeValue
+     * @var QuantitativeValue|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $baseWeight;
 
     /**
-     * @var DaysOfWorkout
+     * @var DaysOfWorkout|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\DaysOfWorkout")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $DaysOfWorkout;
 
     /**
-     * @var ExerciseFromUser
+     * @var ExerciseFromUser|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\ExerciseFromUser")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
      */
     private $ExerciseFromUser;
 
@@ -106,82 +98,82 @@ class DaysOfWorkoutExercise extends AbstractDate
         return $this->id;
     }
 
-    public function setBetweenSetsRestPeriod(int $betweenSetsRestPeriod): void
+    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
     {
         $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
     }
 
-    public function getBetweenSetsRestPeriod(): int
+    public function getBetweenSetsRestPeriod(): ?int
     {
         return $this->betweenSetsRestPeriod;
     }
 
-    public function setAfterExerciseRestPeriod(int $AfterExerciseRestPeriod): void
+    public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
     {
         $this->AfterExerciseRestPeriod = $AfterExerciseRestPeriod;
     }
 
-    public function getAfterExerciseRestPeriod(): int
+    public function getAfterExerciseRestPeriod(): ?int
     {
         return $this->AfterExerciseRestPeriod;
     }
 
-    public function setBaseRep(int $baseRep): void
+    public function setBaseRep(?int $baseRep): void
     {
         $this->baseRep = $baseRep;
     }
 
-    public function getBaseRep(): int
+    public function getBaseRep(): ?int
     {
         return $this->baseRep;
     }
 
-    public function setBaseSet(int $baseSet): void
+    public function setBaseSet(?int $baseSet): void
     {
         $this->baseSet = $baseSet;
     }
 
-    public function getBaseSet(): int
+    public function getBaseSet(): ?int
     {
         return $this->baseSet;
     }
 
-    public function setOrder(int $order): void
+    public function setOrder(?int $order): void
     {
         $this->order = $order;
     }
 
-    public function getOrder(): int
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    public function setBaseWeight(QuantitativeValue $baseWeight): void
+    public function setBaseWeight(?QuantitativeValue $baseWeight): void
     {
         $this->baseWeight = $baseWeight;
     }
 
-    public function getBaseWeight(): QuantitativeValue
+    public function getBaseWeight(): ?QuantitativeValue
     {
         return $this->baseWeight;
     }
 
-    public function setDaysOfWorkout(DaysOfWorkout $DaysOfWorkout): void
+    public function setDaysOfWorkout(?DaysOfWorkout $DaysOfWorkout): void
     {
         $this->DaysOfWorkout = $DaysOfWorkout;
     }
 
-    public function getDaysOfWorkout(): DaysOfWorkout
+    public function getDaysOfWorkout(): ?DaysOfWorkout
     {
         return $this->DaysOfWorkout;
     }
 
-    public function setExerciseFromUser(ExerciseFromUser $ExerciseFromUser): void
+    public function setExerciseFromUser(?ExerciseFromUser $ExerciseFromUser): void
     {
         $this->ExerciseFromUser = $ExerciseFromUser;
     }
 
-    public function getExerciseFromUser(): ExerciseFromUser
+    public function getExerciseFromUser(): ?ExerciseFromUser
     {
         return $this->ExerciseFromUser;
     }

@@ -35,7 +35,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text",nullable=true)
      * @ApiProperty(iri="http://schema.org/familyName")
      */
     private $familyName;
@@ -43,23 +43,15 @@ class Person extends AbstractDate
     /**
      * @var string|null Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text",nullable=true)
      * @ApiProperty(iri="http://schema.org/givenName")
      */
     private $givenName;
 
     /**
-     * @var string|null an additional name for a Person, can be used for a middle name
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @ApiProperty(iri="http://schema.org/additionalName")
-     */
-    private $additionalName;
-
-    /**
      * @var \DateTimeInterface|null date of birth
      *
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date",nullable=true)
      * @ApiProperty(iri="http://schema.org/birthDate")
      * @Assert\Date
      */
@@ -75,17 +67,9 @@ class Person extends AbstractDate
     private $follows;
 
     /**
-     * @var Person|null the most generic bi-directional social/work relation
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Person")
-     * @ApiProperty(iri="http://schema.org/knows")
-     */
-    private $know;
-
-    /**
      * @var string|null Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text",nullable=true)
      * @ApiProperty(iri="http://schema.org/gender")
      */
     private $gender;
@@ -93,7 +77,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Of a [Person](http://schema.org/Person), and less typically of an [Organization](http://schema.org/Organization), to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text",nullable=true)
      * @ApiProperty(iri="http://schema.org/knowsLanguage")
      */
     private $knowsLanguage;
@@ -101,7 +85,7 @@ class Person extends AbstractDate
     /**
      * @var string|null nationality of the person
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text",nullable=true)
      * @ApiProperty(iri="http://schema.org/nationality")
      */
     private $nationality;
@@ -123,17 +107,16 @@ class Person extends AbstractDate
     private $height;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(type="boolean")
-     * @Assert\NotNull
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $unitsOfMeasurement;
 
     /**
      * @var Collection<WorkoutPlan>|null
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\WorkoutPlan")
+     * @ORM\OneToMany(targetEntity="App\Entity\WorkoutPlan", mappedBy="owned")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
      */
     private $workoutPlans;
@@ -174,16 +157,6 @@ class Person extends AbstractDate
         return $this->givenName;
     }
 
-    public function setAdditionalName(?string $additionalName): void
-    {
-        $this->additionalName = $additionalName;
-    }
-
-    public function getAdditionalName(): ?string
-    {
-        return $this->additionalName;
-    }
-
     public function setBirthDate(?\DateTimeInterface $birthDate): void
     {
         $this->birthDate = $birthDate;
@@ -207,16 +180,6 @@ class Person extends AbstractDate
     public function getFollows(): Collection
     {
         return $this->follows;
-    }
-
-    public function setKnow(?Person $know): void
-    {
-        $this->know = $know;
-    }
-
-    public function getKnow(): ?Person
-    {
-        return $this->know;
     }
 
     public function setGender(?string $gender): void
@@ -269,12 +232,12 @@ class Person extends AbstractDate
         return $this->height;
     }
 
-    public function setUnitsOfMeasurement(bool $unitsOfMeasurement): void
+    public function setUnitsOfMeasurement(?bool $unitsOfMeasurement): void
     {
         $this->unitsOfMeasurement = $unitsOfMeasurement;
     }
 
-    public function getUnitsOfMeasurement(): bool
+    public function getUnitsOfMeasurement(): ?bool
     {
         return $this->unitsOfMeasurement;
     }
