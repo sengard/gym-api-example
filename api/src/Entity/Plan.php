@@ -40,12 +40,12 @@ class Plan extends AbstractThing
     private $owned;
 
     /**
-     * @var Collection<Days>|null
+     * @var Collection<Workouts>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Days", mappedBy="plan")
+     * @ORM\OneToMany(targetEntity="App\Entity\Workouts", mappedBy="plan")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
      */
-    private $days;
+    private $workouts;
 
     /**
      * @var bool|null
@@ -56,7 +56,7 @@ class Plan extends AbstractThing
 
     public function __construct()
     {
-        $this->days = new ArrayCollection();
+        $this->workouts = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -79,19 +79,19 @@ class Plan extends AbstractThing
         return $this->owned;
     }
 
-    public function addDay(Days $day): void
+    public function addWorkout(Workouts $workout): void
     {
-        $this->days[] = $day;
+        $this->workouts[] = $workout;
     }
 
-    public function removeDay(Days $day): void
+    public function removeWorkout(Workouts $workout): void
     {
-        $this->days->removeElement($day);
+        $this->workouts->removeElement($workout);
     }
 
-    public function getDays(): Collection
+    public function getWorkouts(): Collection
     {
-        return $this->days;
+        return $this->workouts;
     }
 
     public function setIsCurrent(?bool $isCurrent): void

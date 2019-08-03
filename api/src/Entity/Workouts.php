@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Days extends AbstractThing
+class Workouts extends AbstractThing
 {
     /**
      * @var string
@@ -34,7 +34,7 @@ class Days extends AbstractThing
     /**
      * @var Plan|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="days")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="workouts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $plan;
@@ -47,16 +47,16 @@ class Days extends AbstractThing
     private $dayNumber;
 
     /**
-     * @var Collection<ExerciseDaySetup>|null
+     * @var Collection<ExerciseWorkoutSetup>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseDaySetup", mappedBy="days")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkoutSetup", mappedBy="workouts")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})
      */
-    private $exerciseDaySetups;
+    private $exerciseWorkoutSetups;
 
     public function __construct()
     {
-        $this->exerciseDaySetups = new ArrayCollection();
+        $this->exerciseWorkoutSetups = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -89,18 +89,18 @@ class Days extends AbstractThing
         return $this->dayNumber;
     }
 
-    public function addExerciseDaySetup(ExerciseDaySetup $exerciseDaySetup): void
+    public function addExerciseWorkoutSetup(ExerciseWorkoutSetup $exerciseWorkoutSetup): void
     {
-        $this->exerciseDaySetups[] = $exerciseDaySetup;
+        $this->exerciseWorkoutSetups[] = $exerciseWorkoutSetup;
     }
 
-    public function removeExerciseDaySetup(ExerciseDaySetup $exerciseDaySetup): void
+    public function removeExerciseWorkoutSetup(ExerciseWorkoutSetup $exerciseWorkoutSetup): void
     {
-        $this->exerciseDaySetups->removeElement($exerciseDaySetup);
+        $this->exerciseWorkoutSetups->removeElement($exerciseWorkoutSetup);
     }
 
-    public function getExerciseDaySetups(): Collection
+    public function getExerciseWorkoutSetups(): Collection
     {
-        return $this->exerciseDaySetups;
+        return $this->exerciseWorkoutSetups;
     }
 }

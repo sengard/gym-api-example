@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class ExerciseDaySetup extends AbstractDate
+class ExerciseWorkoutSetup extends AbstractDate
 {
     /**
      * @var string
@@ -73,17 +73,17 @@ class ExerciseDaySetup extends AbstractDate
     private $baseWeight;
 
     /**
-     * @var Days|null
+     * @var Workouts|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Days", inversedBy="exerciseDaySetup")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Workouts", inversedBy="exerciseWorkoutSetup")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $day;
+    private $workout;
 
     /**
-     * @var ExerciseMadenByUser|null
+     * @var ExerciseMaidenByUser|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\ExerciseMadenByUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ExerciseMaidenByUser")
      * @ORM\JoinColumn(nullable=false)
      */
     private $exerciseMadenByUser;
@@ -158,22 +158,22 @@ class ExerciseDaySetup extends AbstractDate
         return $this->baseWeight;
     }
 
-    public function setDay(?Days $day): void
+    public function setWorkout(?Workouts $workout): void
     {
-        $this->day = $day;
+        $this->workout = $workout;
     }
 
-    public function getDay(): ?Days
+    public function getWorkout(): ?Workouts
     {
-        return $this->day;
+        return $this->workout;
     }
 
-    public function setExerciseMadenByUser(?ExerciseMadenByUser $exerciseMadenByUser): void
+    public function setExerciseMadenByUser(?ExerciseMaidenByUser $exerciseMadenByUser): void
     {
         $this->exerciseMadenByUser = $exerciseMadenByUser;
     }
 
-    public function getExerciseMadenByUser(): ?ExerciseMadenByUser
+    public function getExerciseMadenByUser(): ?ExerciseMaidenByUser
     {
         return $this->exerciseMadenByUser;
     }
