@@ -42,6 +42,13 @@ abstract class AbstractThing extends AbstractDate
      */
     protected $image;
 
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(type="boolean",nullable=true,)
+     */
+    private $isActive = true;
+
     public function setName(?string $name): void
     {
         $this->name = $name;
@@ -70,5 +77,21 @@ abstract class AbstractThing extends AbstractDate
     public function getImage(): ?MediaObject
     {
         return $this->image;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool|null $isActive
+     */
+    public function setIsActive(?bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }
