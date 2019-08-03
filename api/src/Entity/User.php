@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints  as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,6 +25,7 @@ class User extends AbstractDate implements UserInterface
      *
      * @ORM\Id
      * @ORM\Column(type="guid")
+     * @Groups({"read", "write"})
      * @Assert\Uuid
      */
     private $id;
@@ -31,12 +33,15 @@ class User extends AbstractDate implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      *
+     * @Groups({"read", "write"})
      * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("admin")
+     *
      */
     private $roles = [];
 
@@ -45,6 +50,7 @@ class User extends AbstractDate implements UserInterface
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      * @Assert\Length(min = 6, max = 4096)
+     * @Groups("write")
      */
     private $password;
 

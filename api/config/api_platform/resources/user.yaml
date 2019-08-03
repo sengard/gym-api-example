@@ -1,7 +1,9 @@
 App\Entity\User:
     attributes:
         normalization_context:
-            groups: ['user_read']
+            groups: ['read']
+        denormalizationContext:
+            groups: ['write']
     itemOperations: 
         get: ~
         put:
