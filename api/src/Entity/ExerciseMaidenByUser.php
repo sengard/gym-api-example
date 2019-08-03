@@ -38,13 +38,6 @@ class ExerciseMaidenByUser extends AbstractHasUser
     private $owned;
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(type="boolean",nullable=true)
-     */
-    private $isPublic;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(type="text",nullable=true)
@@ -69,16 +62,6 @@ class ExerciseMaidenByUser extends AbstractHasUser
     public function getOwned(): ?Person
     {
         return $this->owned;
-    }
-
-    public function setIsPublic(?bool $isPublic): void
-    {
-        $this->isPublic = $isPublic;
-    }
-
-    public function getIsPublic(): ?bool
-    {
-        return $this->isPublic;
     }
 
     public function setLanguage(?string $language): void

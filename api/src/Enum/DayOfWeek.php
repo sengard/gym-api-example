@@ -14,6 +14,7 @@ use MyCLabs\Enum\Enum;
  * @see http://schema.org/DayOfWeek Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
+ * @ApiResource(iri="http://schema.org/DayOfWeek")
  */
 class DayOfWeek extends Enum
 {

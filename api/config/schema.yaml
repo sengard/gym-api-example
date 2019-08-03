@@ -170,6 +170,8 @@ types:
                 range: "ExerciseWorkoutSetup"
                 cardinality: "(1..*)"
                 mappedBy: "workouts"
+    DayOfWeek:
+        properties: {}
                 
     ExerciseWorkoutSetup:
         parent: AbstractDate
@@ -193,5 +195,4 @@ types:
         parent: AbstractHasUser
         properties:
             owned: {range: "Person"}
-            isPublic: {range: "Boolean"}
             language: {range: "Text"}
