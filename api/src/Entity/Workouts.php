@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Enum\DayOfWeek;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Workouts extends AbstractThing
+class Workouts extends AbstractHasUser
 {
     /**
      * @var string
@@ -40,9 +41,10 @@ class Workouts extends AbstractThing
     private $plan;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(nullable=true)
+     * @Assert\Choice(callback={"DayOfWeek", "toArray"})
      */
     private $dayNumber;
 
@@ -79,12 +81,12 @@ class Workouts extends AbstractThing
         return $this->plan;
     }
 
-    public function setDayNumber(?int $dayNumber): void
+    public function setDayNumber(?string $dayNumber): void
     {
         $this->dayNumber = $dayNumber;
     }
 
-    public function getDayNumber(): ?int
+    public function getDayNumber(): ?string
     {
         return $this->dayNumber;
     }

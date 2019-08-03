@@ -108,6 +108,12 @@ types:
 #            name: ~
 #            image: { range: "MediaObject" }
 #            description: ~
+#    AbstractHasUser:
+#        parent: AbstractThing
+##        implements: HasUser
+#        properties: 
+#            user: { range: "User" }
+
 
     QuantitativeValue:
         parent: AbstractDate
@@ -141,7 +147,7 @@ types:
         #todo add measurements and progression for that             
             
     Plan:
-        parent: AbstractThing
+        parent: AbstractHasUser
         properties:
 #            author: {range: "Person"}
             owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
@@ -152,7 +158,7 @@ types:
             isCurrent: {range: "Boolean" }
         
     Workouts:
-        parent: AbstractThing
+        parent: AbstractHasUser
         properties:
             plan:
                 range: "Plan"
@@ -164,8 +170,6 @@ types:
                 range: "ExerciseWorkoutSetup"
                 cardinality: "(1..*)"
                 mappedBy: "workouts"
-    DayOfWeek:
-        {}
                 
     ExerciseWorkoutSetup:
         parent: AbstractDate
@@ -186,7 +190,7 @@ types:
 #            exerciseFromAdmin: { range: "ExerciseFromAdmin" }
 
     ExerciseMaidenByUser:
-        parent: AbstractThing
+        parent: AbstractHasUser
         properties:
             owned: {range: "Person"}
             isPublic: {range: "Boolean"}

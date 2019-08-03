@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Plan extends AbstractThing
+class Plan extends AbstractHasUser
 {
     /**
      * @var string
