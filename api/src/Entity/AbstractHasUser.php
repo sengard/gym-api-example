@@ -20,16 +20,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AbstractHasUser extends AbstractThing implements HasOwner
 {
-
-
     /**
      * @var User|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
 
     /**
      * @param User|null $user

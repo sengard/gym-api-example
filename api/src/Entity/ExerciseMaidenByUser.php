@@ -30,19 +30,54 @@ class ExerciseMaidenByUser extends AbstractHasUser
     private $id;
 
     /**
-     * @var Person|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Person")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owned;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(type="text",nullable=true)
      */
     private $language;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $betweenSetsRestPeriod;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $AfterExerciseRestPeriod;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $baseRep;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $baseSet;
+
+    /**
+     * @var QuantitativeValue|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $baseWeight;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $baseTime;
 
     public function setId(string $id): void
     {
@@ -54,16 +89,6 @@ class ExerciseMaidenByUser extends AbstractHasUser
         return $this->id;
     }
 
-    public function setOwned(?Person $owned): void
-    {
-        $this->owned = $owned;
-    }
-
-    public function getOwned(): ?Person
-    {
-        return $this->owned;
-    }
-
     public function setLanguage(?string $language): void
     {
         $this->language = $language;
@@ -72,5 +97,65 @@ class ExerciseMaidenByUser extends AbstractHasUser
     public function getLanguage(): ?string
     {
         return $this->language;
+    }
+
+    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
+    {
+        $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
+    }
+
+    public function getBetweenSetsRestPeriod(): ?int
+    {
+        return $this->betweenSetsRestPeriod;
+    }
+
+    public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
+    {
+        $this->AfterExerciseRestPeriod = $AfterExerciseRestPeriod;
+    }
+
+    public function getAfterExerciseRestPeriod(): ?int
+    {
+        return $this->AfterExerciseRestPeriod;
+    }
+
+    public function setBaseRep(?int $baseRep): void
+    {
+        $this->baseRep = $baseRep;
+    }
+
+    public function getBaseRep(): ?int
+    {
+        return $this->baseRep;
+    }
+
+    public function setBaseSet(?int $baseSet): void
+    {
+        $this->baseSet = $baseSet;
+    }
+
+    public function getBaseSet(): ?int
+    {
+        return $this->baseSet;
+    }
+
+    public function setBaseWeight(?QuantitativeValue $baseWeight): void
+    {
+        $this->baseWeight = $baseWeight;
+    }
+
+    public function getBaseWeight(): ?QuantitativeValue
+    {
+        return $this->baseWeight;
+    }
+
+    public function setBaseTime(?int $baseTime): void
+    {
+        $this->baseTime = $baseTime;
+    }
+
+    public function getBaseTime(): ?int
+    {
+        return $this->baseTime;
     }
 }

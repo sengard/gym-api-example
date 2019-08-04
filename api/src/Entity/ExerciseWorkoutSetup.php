@@ -34,43 +34,7 @@ class ExerciseWorkoutSetup extends AbstractDate
      *
      * @ORM\Column(type="integer",nullable=true)
      */
-    private $betweenSetsRestPeriod;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer",nullable=true)
-     */
-    private $AfterExerciseRestPeriod;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer",nullable=true)
-     */
-    private $baseRep;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer",nullable=true)
-     */
-    private $baseSet;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer",nullable=true)
-     */
     private $order;
-
-    /**
-     * @var QuantitativeValue|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $baseWeight;
 
     /**
      * @var Workouts|null
@@ -88,6 +52,13 @@ class ExerciseWorkoutSetup extends AbstractDate
      */
     private $exerciseMadenByUser;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $AfterExerciseRestPeriod;
+
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -98,46 +69,6 @@ class ExerciseWorkoutSetup extends AbstractDate
         return $this->id;
     }
 
-    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
-    {
-        $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
-    }
-
-    public function getBetweenSetsRestPeriod(): ?int
-    {
-        return $this->betweenSetsRestPeriod;
-    }
-
-    public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
-    {
-        $this->AfterExerciseRestPeriod = $AfterExerciseRestPeriod;
-    }
-
-    public function getAfterExerciseRestPeriod(): ?int
-    {
-        return $this->AfterExerciseRestPeriod;
-    }
-
-    public function setBaseRep(?int $baseRep): void
-    {
-        $this->baseRep = $baseRep;
-    }
-
-    public function getBaseRep(): ?int
-    {
-        return $this->baseRep;
-    }
-
-    public function setBaseSet(?int $baseSet): void
-    {
-        $this->baseSet = $baseSet;
-    }
-
-    public function getBaseSet(): ?int
-    {
-        return $this->baseSet;
-    }
-
     public function setOrder(?int $order): void
     {
         $this->order = $order;
@@ -146,16 +77,6 @@ class ExerciseWorkoutSetup extends AbstractDate
     public function getOrder(): ?int
     {
         return $this->order;
-    }
-
-    public function setBaseWeight(?QuantitativeValue $baseWeight): void
-    {
-        $this->baseWeight = $baseWeight;
-    }
-
-    public function getBaseWeight(): ?QuantitativeValue
-    {
-        return $this->baseWeight;
     }
 
     public function setWorkout(?Workouts $workout): void
@@ -176,5 +97,15 @@ class ExerciseWorkoutSetup extends AbstractDate
     public function getExerciseMadenByUser(): ?ExerciseMaidenByUser
     {
         return $this->exerciseMadenByUser;
+    }
+
+    public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
+    {
+        $this->AfterExerciseRestPeriod = $AfterExerciseRestPeriod;
+    }
+
+    public function getAfterExerciseRestPeriod(): ?int
+    {
+        return $this->AfterExerciseRestPeriod;
     }
 }

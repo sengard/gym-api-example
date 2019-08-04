@@ -32,14 +32,6 @@ class Plan extends AbstractHasUser
     private $id;
 
     /**
-     * @var Person|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="plans")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owned;
-
-    /**
      * @var Collection<Workouts>|null
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Workouts", mappedBy="plan")
@@ -67,16 +59,6 @@ class Plan extends AbstractHasUser
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function setOwned(?Person $owned): void
-    {
-        $this->owned = $owned;
-    }
-
-    public function getOwned(): ?Person
-    {
-        return $this->owned;
     }
 
     public function addWorkout(Workouts $workout): void

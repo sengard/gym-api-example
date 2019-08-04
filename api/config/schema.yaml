@@ -149,8 +149,7 @@ types:
     Plan:
         parent: AbstractHasUser
         properties:
-#            author: {range: "Person"}
-            owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
+#            owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
             workouts:  { range: "Workouts", cardinality: "(0..*)", mappedBy: "plan" }
 #            category:
 #                range: "PhysicalActivityCategory" # enum
@@ -176,12 +175,7 @@ types:
     ExerciseWorkoutSetup:
         parent: AbstractDate
         properties:
-            betweenSetsRestPeriod: { range: "Integer" }
-            AfterExerciseRestPeriod: { range: "Integer" }
-            baseReps: { range: "Integer" }
-            baseSets: { range: "Integer" }
             order: { range: "Integer" }                   #todo count how many exercise for day +1
-            baseWeight: { range: "QuantitativeValue" }
             workouts:
                 range: "Workouts"
                 cardinality: "(*..1)"
@@ -189,10 +183,18 @@ types:
             exerciseMadenByUser:
                 range: "ExerciseMaidenByUser"
                 cardinality: "(*..1)"
+            AfterExerciseRestPeriod:
+                range: "Integer"
 #            exerciseFromAdmin: { range: "ExerciseFromAdmin" }
 
     ExerciseMaidenByUser:
         parent: AbstractHasUser
         properties:
-            owned: {range: "Person"}
             language: {range: "Text"}
+            betweenSetsRestPeriod: { range: "Integer" }
+            afterExerciseRestPeriod: { range: "Integer" }
+            baseReps: { range: "Integer" }
+            baseSets: { range: "Integer" }
+            baseWeight: { range: "QuantitativeValue" }
+            baseTime: { range: "Integer" }
+            
