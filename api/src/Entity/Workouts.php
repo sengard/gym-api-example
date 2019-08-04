@@ -49,16 +49,16 @@ class Workouts extends AbstractHasUser
     private $dayNumber;
 
     /**
-     * @var Collection<ExerciseWorkoutSetup>|null
+     * @var Collection<ExerciseWorkout>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkoutSetup", mappedBy="workouts")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkout", mappedBy="workouts")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})
      */
-    private $exerciseWorkoutSetups;
+    private $exerciseWorkouts;
 
     public function __construct()
     {
-        $this->exerciseWorkoutSetups = new ArrayCollection();
+        $this->exerciseWorkouts = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -91,18 +91,18 @@ class Workouts extends AbstractHasUser
         return $this->dayNumber;
     }
 
-    public function addExerciseWorkoutSetup(ExerciseWorkoutSetup $exerciseWorkoutSetup): void
+    public function addExerciseWorkout(ExerciseWorkout $exerciseWorkout): void
     {
-        $this->exerciseWorkoutSetups[] = $exerciseWorkoutSetup;
+        $this->exerciseWorkouts[] = $exerciseWorkout;
     }
 
-    public function removeExerciseWorkoutSetup(ExerciseWorkoutSetup $exerciseWorkoutSetup): void
+    public function removeExerciseWorkout(ExerciseWorkout $exerciseWorkout): void
     {
-        $this->exerciseWorkoutSetups->removeElement($exerciseWorkoutSetup);
+        $this->exerciseWorkouts->removeElement($exerciseWorkout);
     }
 
-    public function getExerciseWorkoutSetups(): Collection
+    public function getExerciseWorkouts(): Collection
     {
-        return $this->exerciseWorkoutSetups;
+        return $this->exerciseWorkouts;
     }
 }

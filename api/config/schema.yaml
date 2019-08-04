@@ -165,36 +165,50 @@ types:
                 inversedBy: "workouts"
             dayNumber:
                 range: "DayOfWeek" 
-            exerciseWorkoutSetup:
-                range: "ExerciseWorkoutSetup"
+            exerciseWorkout:
+                range: "ExerciseWorkout"
                 cardinality: "(1..*)"
                 mappedBy: "workouts"
     DayOfWeek:
         properties: {}
                 
-    ExerciseWorkoutSetup:
+    ExerciseWorkout:
         parent: AbstractDate
         properties:
             order: { range: "Integer" }                   #todo count how many exercise for day +1
             workouts:
                 range: "Workouts"
                 cardinality: "(*..1)"
-                inversedBy: "exerciseWorkoutSetup"
-            exerciseMadenByUser:
-                range: "ExerciseMaidenByUser"
+                inversedBy: "exerciseWorkout"
+            exercise:
+                range: "Exercise"
                 cardinality: "(*..1)"
             AfterExerciseRestPeriod:
                 range: "Integer"
-#            exerciseFromAdmin: { range: "ExerciseFromAdmin" }
+            baseReps: { range: "Integer" }
+            baseSets: { range: "Integer" }
+            baseWeight: { range: "QuantitativeValue" }
+            baseRange: { range: "QuantitativeValue" }
+            baseTime: { range: "Integer" }
+            
 
-    ExerciseMaidenByUser:
+    Exercise:
         parent: AbstractHasUser
         properties:
             language: {range: "Text"}
             betweenSetsRestPeriod: { range: "Integer" }
             afterExerciseRestPeriod: { range: "Integer" }
+            typeOfExercise: { range: "Text" } #todo enum
+            musculeTypees: { range: "Text" } #todo enum
+    ExerciseLogs:
+        properties:
+            user: {range: "Person" ,cardinality: "(*..1)"} #todo user
+            exercise:
+                range: "Exercise"
+                cardinality: "(*..1)"
             baseReps: { range: "Integer" }
-            baseSets: { range: "Integer" }
+            baseSet: { range: "Integer" }
             baseWeight: { range: "QuantitativeValue" }
+            baseRange: { range: "QuantitativeValue" }
             baseTime: { range: "Integer" }
             

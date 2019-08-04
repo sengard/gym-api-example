@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Model\HasOwner;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,14 +15,13 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
- * @ORM\Entity
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ORM\MappedSuperclass
  */
-class AbstractHasUser extends AbstractThing implements HasOwner
+abstract class AbstractHasUser extends AbstractThing implements HasOwner
 {
     /**
      * @var User|null
-     *
+     * @ApiProperty(iri="http://schema.org/user")
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */

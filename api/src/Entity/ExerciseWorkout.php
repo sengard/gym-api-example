@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class ExerciseMaidenByUser extends AbstractHasUser
+class ExerciseWorkout extends AbstractDate
 {
     /**
      * @var string
@@ -30,18 +30,27 @@ class ExerciseMaidenByUser extends AbstractHasUser
     private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text",nullable=true)
-     */
-    private $language;
-
-    /**
      * @var int|null
      *
      * @ORM\Column(type="integer",nullable=true)
      */
-    private $betweenSetsRestPeriod;
+    private $order;
+
+    /**
+     * @var Workouts|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Workouts", inversedBy="exerciseWorkout")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $workout;
+
+    /**
+     * @var Exercise|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Exercise")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $exercise;
 
     /**
      * @var int|null
@@ -73,6 +82,14 @@ class ExerciseMaidenByUser extends AbstractHasUser
     private $baseWeight;
 
     /**
+     * @var QuantitativeValue|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $baseRange;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(type="integer",nullable=true)
@@ -89,24 +106,34 @@ class ExerciseMaidenByUser extends AbstractHasUser
         return $this->id;
     }
 
-    public function setLanguage(?string $language): void
+    public function setOrder(?int $order): void
     {
-        $this->language = $language;
+        $this->order = $order;
     }
 
-    public function getLanguage(): ?string
+    public function getOrder(): ?int
     {
-        return $this->language;
+        return $this->order;
     }
 
-    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
+    public function setWorkout(?Workouts $workout): void
     {
-        $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
+        $this->workout = $workout;
     }
 
-    public function getBetweenSetsRestPeriod(): ?int
+    public function getWorkout(): ?Workouts
     {
-        return $this->betweenSetsRestPeriod;
+        return $this->workout;
+    }
+
+    public function setExercise(?Exercise $exercise): void
+    {
+        $this->exercise = $exercise;
+    }
+
+    public function getExercise(): ?Exercise
+    {
+        return $this->exercise;
     }
 
     public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
@@ -147,6 +174,16 @@ class ExerciseMaidenByUser extends AbstractHasUser
     public function getBaseWeight(): ?QuantitativeValue
     {
         return $this->baseWeight;
+    }
+
+    public function setBaseRange(?QuantitativeValue $baseRange): void
+    {
+        $this->baseRange = $baseRange;
+    }
+
+    public function getBaseRange(): ?QuantitativeValue
+    {
+        return $this->baseRange;
     }
 
     public function setBaseTime(?int $baseTime): void
