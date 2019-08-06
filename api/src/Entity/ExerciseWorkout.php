@@ -39,7 +39,7 @@ class ExerciseWorkout extends AbstractDate
     /**
      * @var Workout|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Workout", inversedBy="exerciseWorkout")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Workout", inversedBy="exerciseWorkouts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $workout;

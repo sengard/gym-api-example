@@ -35,7 +35,7 @@ class Workout extends AbstractHasUser
     /**
      * @var Plan|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="workout")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="workouts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $plan;

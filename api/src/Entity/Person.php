@@ -113,18 +113,9 @@ class Person extends AbstractDate
      */
     private $unitsOfMeasurement;
 
-    /**
-     * @var Collection<Plan>|null
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Plan", mappedBy="owned")
-     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
-     */
-    private $plans;
-
     public function __construct()
     {
         $this->follows = new ArrayCollection();
-        $this->plans = new ArrayCollection();
     }
 
     public function setId(string $id): void
@@ -240,20 +231,5 @@ class Person extends AbstractDate
     public function getUnitsOfMeasurement(): ?bool
     {
         return $this->unitsOfMeasurement;
-    }
-
-    public function addPlan(Plan $plan): void
-    {
-        $this->plans[] = $plan;
-    }
-
-    public function removePlan(Plan $plan): void
-    {
-        $this->plans->removeElement($plan);
-    }
-
-    public function getPlans(): Collection
-    {
-        return $this->plans;
     }
 }

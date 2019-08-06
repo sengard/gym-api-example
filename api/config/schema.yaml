@@ -140,16 +140,11 @@ types:
             weight: { range: "QuantitativeValue" }
             height: { range: "QuantitativeValue" }
             unitsOfMeasurement: { range: "Boolean" } #true for metric (kg/m) false for imperial (lbs / ft)
-            plans:
-                range: "Plan"
-                cardinality: "(0..*)"
-                mappedBy: owned
         #todo add measurements and progression for that             
             
     Plan:
         parent: AbstractHasUser
         properties:
-#            owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
             workout:  { range: "Workout", cardinality: "(0..*)", mappedBy: "plan" }
 #            category:
 #                range: "PhysicalActivityCategory" # enum
@@ -162,7 +157,7 @@ types:
             plan:
                 range: "Plan"
                 cardinality: "(*..1)"
-                inversedBy: "workout"
+                inversedBy: "workouts"
             dayNumber:
                 range: "DayOfWeek" 
             exerciseWorkout:
@@ -179,7 +174,7 @@ types:
             workout:
                 range: "Workout"
                 cardinality: "(*..1)"
-                inversedBy: "exerciseWorkout"
+                inversedBy: "exerciseWorkouts"
             exercise:
                 range: "Exercise"
                 cardinality: "(*..1)"
