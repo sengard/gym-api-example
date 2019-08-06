@@ -37,9 +37,9 @@ class ExerciseWorkout extends AbstractDate
     private $order;
 
     /**
-     * @var Workouts|null
+     * @var Workout|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Workouts", inversedBy="exerciseWorkout")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Workout", inversedBy="exerciseWorkout")
      * @ORM\JoinColumn(nullable=false)
      */
     private $workout;
@@ -116,12 +116,12 @@ class ExerciseWorkout extends AbstractDate
         return $this->order;
     }
 
-    public function setWorkout(?Workouts $workout): void
+    public function setWorkout(?Workout $workout): void
     {
         $this->workout = $workout;
     }
 
-    public function getWorkout(): ?Workouts
+    public function getWorkout(): ?Workout
     {
         return $this->workout;
     }

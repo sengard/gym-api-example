@@ -150,25 +150,25 @@ types:
         parent: AbstractHasUser
         properties:
 #            owned: {range: "Person", cardinality: "(*..1)", inversedBy: "plans"  }
-            workouts:  { range: "Workouts", cardinality: "(0..*)", mappedBy: "plan" }
+            workout:  { range: "Workout", cardinality: "(0..*)", mappedBy: "plan" }
 #            category:
 #                range: "PhysicalActivityCategory" # enum
 #            difficulty: { range: "Difficulty", nullable: true}
             isCurrent: {range: "Boolean" }
         
-    Workouts:
+    Workout:
         parent: AbstractHasUser
         properties:
             plan:
                 range: "Plan"
                 cardinality: "(*..1)"
-                inversedBy: "workouts"
+                inversedBy: "workout"
             dayNumber:
                 range: "DayOfWeek" 
             exerciseWorkout:
                 range: "ExerciseWorkout"
                 cardinality: "(1..*)"
-                mappedBy: "workouts"
+                mappedBy: "workout"
     DayOfWeek:
         properties: {}
                 
@@ -176,8 +176,8 @@ types:
         parent: AbstractDate
         properties:
             order: { range: "Integer" }                   #todo count how many exercise for day +1
-            workouts:
-                range: "Workouts"
+            workout:
+                range: "Workout"
                 cardinality: "(*..1)"
                 inversedBy: "exerciseWorkout"
             exercise:
@@ -200,7 +200,8 @@ types:
             afterExerciseRestPeriod: { range: "Integer" }
             typeOfExercise: { range: "Text" } #todo enum
             musculeTypees: { range: "Text" } #todo enum
-    ExerciseLogs:
+    ExerciseLog:
+        parent: AbstractDate
         properties:
             user: {range: "Person" ,cardinality: "(*..1)"} #todo user
             exercise:

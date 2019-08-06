@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class Workouts extends AbstractHasUser
+class Workout extends AbstractHasUser
 {
     /**
      * @var string
@@ -35,7 +35,7 @@ class Workouts extends AbstractHasUser
     /**
      * @var Plan|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="workouts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plan", inversedBy="workout")
      * @ORM\JoinColumn(nullable=false)
      */
     private $plan;
@@ -51,7 +51,7 @@ class Workouts extends AbstractHasUser
     /**
      * @var Collection<ExerciseWorkout>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkout", mappedBy="workouts")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkout", mappedBy="workout")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})
      */
     private $exerciseWorkouts;

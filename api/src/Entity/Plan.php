@@ -32,9 +32,9 @@ class Plan extends AbstractHasUser
     private $id;
 
     /**
-     * @var Collection<Workouts>|null
+     * @var Collection<Workout>|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Workouts", mappedBy="plan")
+     * @ORM\OneToMany(targetEntity="App\Entity\Workout", mappedBy="plan")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
      */
     private $workouts;
@@ -61,12 +61,12 @@ class Plan extends AbstractHasUser
         return $this->id;
     }
 
-    public function addWorkout(Workouts $workout): void
+    public function addWorkout(Workout $workout): void
     {
         $this->workouts[] = $workout;
     }
 
-    public function removeWorkout(Workouts $workout): void
+    public function removeWorkout(Workout $workout): void
     {
         $this->workouts->removeElement($workout);
     }
