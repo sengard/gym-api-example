@@ -11,6 +11,7 @@ security:
                 class: App\Entity\User
                 property: email
 
+        in_memory: { memory: null }
     firewalls:
         dev:
             pattern: ^/_(profiler|wdt)
