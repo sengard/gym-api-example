@@ -14,3 +14,4 @@ framework:
     #fragments: true
     php_errors:
         log: true
+    trusted_hosts:  ['10.0.0.7', 'localhost','127.0.0.1','905b47b7.ngrok.io']
