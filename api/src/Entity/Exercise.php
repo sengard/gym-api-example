@@ -32,35 +32,35 @@ class Exercise extends AbstractHasUser
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $language;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $betweenSetsRestPeriod;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $afterExerciseRestPeriod;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $typeOfExercise;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $musculeTypee;
 

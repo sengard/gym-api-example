@@ -32,7 +32,7 @@ class ExerciseWorkout extends AbstractDate
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $order;
 
@@ -55,21 +55,21 @@ class ExerciseWorkout extends AbstractDate
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $AfterExerciseRestPeriod;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseRep;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseSet;
 
@@ -92,7 +92,7 @@ class ExerciseWorkout extends AbstractDate
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseTime;
 

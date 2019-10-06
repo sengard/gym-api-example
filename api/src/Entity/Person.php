@@ -35,7 +35,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/familyName")
      */
     private $familyName;
@@ -43,7 +43,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/givenName")
      */
     private $givenName;
@@ -51,7 +51,7 @@ class Person extends AbstractDate
     /**
      * @var \DateTimeInterface|null date of birth
      *
-     * @ORM\Column(type="date",nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @ApiProperty(iri="http://schema.org/birthDate")
      * @Assert\Date
      */
@@ -69,7 +69,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/gender")
      */
     private $gender;
@@ -77,7 +77,7 @@ class Person extends AbstractDate
     /**
      * @var string|null Of a [Person](http://schema.org/Person), and less typically of an [Organization](http://schema.org/Organization), to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/knowsLanguage")
      */
     private $knowsLanguage;
@@ -85,7 +85,7 @@ class Person extends AbstractDate
     /**
      * @var string|null nationality of the person
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/nationality")
      */
     private $nationality;
@@ -109,7 +109,7 @@ class Person extends AbstractDate
     /**
      * @var bool|null
      *
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $unitsOfMeasurement;
 

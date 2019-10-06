@@ -42,7 +42,7 @@ class Plan extends AbstractHasUser
     /**
      * @var bool|null
      *
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isCurrent;
 

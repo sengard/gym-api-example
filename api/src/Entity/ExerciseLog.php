@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Model\HasOwner;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class ExerciseLog extends AbstractDate
+class ExerciseLog extends AbstractDate implements HasOwner
 {
     /**
      * @var string
@@ -30,9 +31,9 @@ class ExerciseLog extends AbstractDate
     private $id;
 
     /**
-     * @var Person|null
+     * @var User|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -48,14 +49,14 @@ class ExerciseLog extends AbstractDate
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseRep;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseSet;
 
@@ -78,7 +79,7 @@ class ExerciseLog extends AbstractDate
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseTime;
 
@@ -92,12 +93,18 @@ class ExerciseLog extends AbstractDate
         return $this->id;
     }
 
-    public function setUser(?Person $user): void
+    /**
+     * @param User|null $user
+     */
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
 
-    public function getUser(): ?Person
+    /**
+     * @return User|null
+     */
+    public function getUser()
     {
         return $this->user;
     }

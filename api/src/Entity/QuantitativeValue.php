@@ -38,7 +38,7 @@ class QuantitativeValue extends AbstractDate
      *    - Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.
      *    - Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
      *
-     * @ORM\Column(type="float",nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @ApiProperty(iri="http://schema.org/value")
      */
     private $value;
@@ -46,7 +46,7 @@ class QuantitativeValue extends AbstractDate
     /**
      * @var string|null The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/unitCode")
      */
     private $unitCode;

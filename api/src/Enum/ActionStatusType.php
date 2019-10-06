@@ -39,7 +39,7 @@ class ActionStatusType extends Enum
     /**
      * @var string|null the name of the item
      *
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/name")
      */
     private $name;

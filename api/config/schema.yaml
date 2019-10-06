@@ -198,7 +198,7 @@ types:
     ExerciseLog:
         parent: AbstractDate
         properties:
-            user: {range: "Person" ,cardinality: "(*..1)"} #todo user
+            user: {range: "User" ,cardinality: "(*..1)"} #todo user
             exercise:
                 range: "Exercise"
                 cardinality: "(*..1)"
