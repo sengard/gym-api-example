@@ -37,20 +37,6 @@ class Exercise extends AbstractHasUser
     private $language;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $betweenSetsRestPeriod;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $afterExerciseRestPeriod;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
@@ -62,7 +48,21 @@ class Exercise extends AbstractHasUser
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $musculeTypee;
+    private $muscleType;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $additionalMuscleType;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $additionalMuscleType2;
 
     public function setId(string $id): void
     {
@@ -84,26 +84,6 @@ class Exercise extends AbstractHasUser
         return $this->language;
     }
 
-    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
-    {
-        $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
-    }
-
-    public function getBetweenSetsRestPeriod(): ?int
-    {
-        return $this->betweenSetsRestPeriod;
-    }
-
-    public function setAfterExerciseRestPeriod(?int $afterExerciseRestPeriod): void
-    {
-        $this->afterExerciseRestPeriod = $afterExerciseRestPeriod;
-    }
-
-    public function getAfterExerciseRestPeriod(): ?int
-    {
-        return $this->afterExerciseRestPeriod;
-    }
-
     public function setTypeOfExercise(?string $typeOfExercise): void
     {
         $this->typeOfExercise = $typeOfExercise;
@@ -114,13 +94,33 @@ class Exercise extends AbstractHasUser
         return $this->typeOfExercise;
     }
 
-    public function setMusculeTypee(?string $musculeTypee): void
+    public function setMuscleType(?string $muscleType): void
     {
-        $this->musculeTypee = $musculeTypee;
+        $this->muscleType = $muscleType;
     }
 
-    public function getMusculeTypee(): ?string
+    public function getMuscleType(): ?string
     {
-        return $this->musculeTypee;
+        return $this->muscleType;
+    }
+
+    public function setAdditionalMuscleType(?string $additionalMuscleType): void
+    {
+        $this->additionalMuscleType = $additionalMuscleType;
+    }
+
+    public function getAdditionalMuscleType(): ?string
+    {
+        return $this->additionalMuscleType;
+    }
+
+    public function setAdditionalMuscleType2(?string $additionalMuscleType2): void
+    {
+        $this->additionalMuscleType2 = $additionalMuscleType2;
+    }
+
+    public function getAdditionalMuscleType2(): ?string
+    {
+        return $this->additionalMuscleType2;
     }
 }

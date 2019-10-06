@@ -83,35 +83,49 @@ class Person extends AbstractDate
     private $knowsLanguage;
 
     /**
-     * @var string|null nationality of the person
+     * @var int|null the weight of the product or person
      *
-     * @ORM\Column(type="text", nullable=true)
-     * @ApiProperty(iri="http://schema.org/nationality")
-     */
-    private $nationality;
-
-    /**
-     * @var QuantitativeValue|null the weight of the product or person
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ORM\Column(type="integer", nullable=true)
      * @ApiProperty(iri="http://schema.org/weight")
      */
     private $weight;
 
     /**
-     * @var QuantitativeValue|null the height of the item
+     * @var int|null the height of the item
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
+     * @ORM\Column(type="integer", nullable=true)
      * @ApiProperty(iri="http://schema.org/height")
      */
     private $height;
 
     /**
-     * @var bool|null
+     * @var string|null
      *
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $unitsOfMeasurement;
+    private $weightMeasurement;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $rangeMeasurement;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $caloriesMeasurement;
+
+    /**
+     * @var User|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="user")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -193,43 +207,69 @@ class Person extends AbstractDate
         return $this->knowsLanguage;
     }
 
-    public function setNationality(?string $nationality): void
-    {
-        $this->nationality = $nationality;
-    }
-
-    public function getNationality(): ?string
-    {
-        return $this->nationality;
-    }
-
-    public function setWeight(?QuantitativeValue $weight): void
+    public function setWeight(?int $weight): void
     {
         $this->weight = $weight;
     }
 
-    public function getWeight(): ?QuantitativeValue
+    public function getWeight(): ?int
     {
         return $this->weight;
     }
 
-    public function setHeight(?QuantitativeValue $height): void
+    public function setHeight(?int $height): void
     {
         $this->height = $height;
     }
 
-    public function getHeight(): ?QuantitativeValue
+    public function getHeight(): ?int
     {
         return $this->height;
     }
 
-    public function setUnitsOfMeasurement(?bool $unitsOfMeasurement): void
+    public function setWeightMeasurement(?string $weightMeasurement): void
     {
-        $this->unitsOfMeasurement = $unitsOfMeasurement;
+        $this->weightMeasurement = $weightMeasurement;
     }
 
-    public function getUnitsOfMeasurement(): ?bool
+    public function getWeightMeasurement(): ?string
     {
-        return $this->unitsOfMeasurement;
+        return $this->weightMeasurement;
+    }
+
+    public function setRangeMeasurement(?string $rangeMeasurement): void
+    {
+        $this->rangeMeasurement = $rangeMeasurement;
+    }
+
+    public function getRangeMeasurement(): ?string
+    {
+        return $this->rangeMeasurement;
+    }
+
+    public function setCaloriesMeasurement(?string $caloriesMeasurement): void
+    {
+        $this->caloriesMeasurement = $caloriesMeasurement;
+    }
+
+    public function getCaloriesMeasurement(): ?string
+    {
+        return $this->caloriesMeasurement;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

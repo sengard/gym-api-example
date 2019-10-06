@@ -1,0 +1,21 @@
+App\Entity\Exercise:
+    exercise_dummy_{1..80}:
+        id: <uuid()>
+        user: '@user_dummy_*'
+        language: "en"   
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: <sentence()>
+        description: <paragraph()>
+    exercise_dummy_user_{1..20}:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: <sentence()>
+        description: <paragraph()>

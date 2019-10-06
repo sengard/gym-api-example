@@ -54,6 +54,12 @@ class User extends AbstractDate implements UserInterface
      */
     private $password;
 
+    /**
+     * One person has One person.
+     * @ORM\OneToOne(targetEntity="Person", mappedBy="user")
+     */
+    private $person;
+
 //    symfony/http-client
 //    public static function loadValidatorMetadata(ClassMetadata $metadata)
 //    {
@@ -141,5 +147,21 @@ class User extends AbstractDate implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPerson()
+    {
+        return $this->person;
+    }
+
+    /**
+     * @param mixed $person
+     */
+    public function setPerson(?Person $person): void
+    {
+        $this->person = $person;
     }
 }

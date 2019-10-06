@@ -61,18 +61,16 @@ class ExerciseLog extends AbstractDate implements HasOwner
     private $baseSet;
 
     /**
-     * @var QuantitativeValue|null
+     * @var int|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseWeight;
 
     /**
-     * @var QuantitativeValue|null
+     * @var int|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseRange;
 
@@ -139,22 +137,22 @@ class ExerciseLog extends AbstractDate implements HasOwner
         return $this->baseSet;
     }
 
-    public function setBaseWeight(?QuantitativeValue $baseWeight): void
+    public function setBaseWeight(?int $baseWeight): void
     {
         $this->baseWeight = $baseWeight;
     }
 
-    public function getBaseWeight(): ?QuantitativeValue
+    public function getBaseWeight(): ?int
     {
         return $this->baseWeight;
     }
 
-    public function setBaseRange(?QuantitativeValue $baseRange): void
+    public function setBaseRange(?int $baseRange): void
     {
         $this->baseRange = $baseRange;
     }
 
-    public function getBaseRange(): ?QuantitativeValue
+    public function getBaseRange(): ?int
     {
         return $this->baseRange;
     }

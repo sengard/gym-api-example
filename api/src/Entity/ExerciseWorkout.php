@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
-class ExerciseWorkout extends AbstractDate
+class ExerciseWorkout
 {
     /**
      * @var string
@@ -34,7 +34,7 @@ class ExerciseWorkout extends AbstractDate
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $order;
+    private $exerciseOrder;
 
     /**
      * @var Workout|null
@@ -57,7 +57,14 @@ class ExerciseWorkout extends AbstractDate
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $AfterExerciseRestPeriod;
+    private $afterExerciseRestPeriod;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $betweenSetsRestPeriod;
 
     /**
      * @var int|null
@@ -74,18 +81,16 @@ class ExerciseWorkout extends AbstractDate
     private $baseSet;
 
     /**
-     * @var QuantitativeValue|null
+     * @var int|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseWeight;
 
     /**
-     * @var QuantitativeValue|null
+     * @var int|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\QuantitativeValue")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $baseRange;
 
@@ -106,14 +111,14 @@ class ExerciseWorkout extends AbstractDate
         return $this->id;
     }
 
-    public function setOrder(?int $order): void
+    public function setExerciseOrder(?int $exerciseOrder): void
     {
-        $this->order = $order;
+        $this->exerciseOrder = $exerciseOrder;
     }
 
-    public function getOrder(): ?int
+    public function getExerciseOrder(): ?int
     {
-        return $this->order;
+        return $this->exerciseOrder;
     }
 
     public function setWorkout(?Workout $workout): void
@@ -136,14 +141,24 @@ class ExerciseWorkout extends AbstractDate
         return $this->exercise;
     }
 
-    public function setAfterExerciseRestPeriod(?int $AfterExerciseRestPeriod): void
+    public function setAfterExerciseRestPeriod(?int $afterExerciseRestPeriod): void
     {
-        $this->AfterExerciseRestPeriod = $AfterExerciseRestPeriod;
+        $this->afterExerciseRestPeriod = $afterExerciseRestPeriod;
     }
 
     public function getAfterExerciseRestPeriod(): ?int
     {
-        return $this->AfterExerciseRestPeriod;
+        return $this->afterExerciseRestPeriod;
+    }
+
+    public function setBetweenSetsRestPeriod(?int $betweenSetsRestPeriod): void
+    {
+        $this->betweenSetsRestPeriod = $betweenSetsRestPeriod;
+    }
+
+    public function getBetweenSetsRestPeriod(): ?int
+    {
+        return $this->betweenSetsRestPeriod;
     }
 
     public function setBaseRep(?int $baseRep): void
@@ -166,22 +181,22 @@ class ExerciseWorkout extends AbstractDate
         return $this->baseSet;
     }
 
-    public function setBaseWeight(?QuantitativeValue $baseWeight): void
+    public function setBaseWeight(?int $baseWeight): void
     {
         $this->baseWeight = $baseWeight;
     }
 
-    public function getBaseWeight(): ?QuantitativeValue
+    public function getBaseWeight(): ?int
     {
         return $this->baseWeight;
     }
 
-    public function setBaseRange(?QuantitativeValue $baseRange): void
+    public function setBaseRange(?int $baseRange): void
     {
         $this->baseRange = $baseRange;
     }
 
-    public function getBaseRange(): ?QuantitativeValue
+    public function getBaseRange(): ?int
     {
         return $this->baseRange;
     }

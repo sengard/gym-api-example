@@ -44,7 +44,7 @@ class Plan extends AbstractHasUser
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $isCurrent;
+    private $isCurrent = true;
 
     public function __construct()
     {

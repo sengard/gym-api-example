@@ -1,0 +1,22 @@
+App\Entity\Plan:
+    plan_test_1:
+        id: <uuid()>
+        user: '@user_test'
+        isActive: true
+        isCurrent: true
+        name: "Plintovich plan !"
+        description: "Plintovich plan to make you look buff!"
+    plan_test_2:
+        id: <uuid()>
+        user: '@user_test'
+        isActive: true
+        isCurrent: false
+        name: "rabinovish plan !"
+        description: "rabinovish plan to make you look buff!"
+    plan_dummy_{1..20}:
+        id: <uuid()>
+        user: '@user_dummy_*'
+        isActive: <boolean(80)>
+        isCurrent: false
+        name: "plan !"
+        description: "plan to make you look buff!"

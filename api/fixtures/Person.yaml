@@ -1,0 +1,40 @@
+App\Entity\Person:
+    person{1..10}:
+        id: <uuid()>
+        familyName: <lastName()>
+        givenName: <firstName()>
+        birthDate: <DateTime()>
+        gender: 'http://schema.org/Female'
+        knowsLanguage: <countryCode()>
+        weight: <numberBetween(50, 120)>
+        height: <numberBetween(50, 200)>
+        weightMeasurement: "KGM"
+        rangeMeasurement: "KTM"
+        caloriesMeasurement: "KAL"
+        user: "@user_dummy_<current()>"
+    person_admin:
+        id: <uuid()>
+        familyName: <lastName()>
+        givenName: <firstName()>
+        birthDate: <DateTime()>
+        gender: 'http://schema.org/Female'
+        knowsLanguage: <countryCode()>
+        weight: <numberBetween(50, 120)>
+        height: <numberBetween(50, 200)>
+        weightMeasurement: "KGM"
+        rangeMeasurement: "KTM"
+        caloriesMeasurement: "KAL"
+        user: "@user_admin"
+    person_test:
+        id: <uuid()>
+        familyName: <lastName()>
+        givenName: <firstName()>
+        birthDate: <DateTime()>
+        gender: 'http://schema.org/Female'
+        knowsLanguage: <countryCode()>
+        weight: <numberBetween(50, 120)>
+        height: <numberBetween(50, 200)>
+        weightMeasurement: "KGM"
+        rangeMeasurement: "KTM"
+        caloriesMeasurement: "KAL"
+        user: "@user_test"

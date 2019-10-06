@@ -1,0 +1,13 @@
+App\Entity\QuantitativeValue:
+    baseWeight_test{1..10}:
+        id: <uuid()>
+        value: <numberBetween(10, 60)>
+        unitCode: "KGM"
+    baseRange_test{1..10}:
+        id: <uuid()>
+        value: <numberBetween(10, 5000)>
+        unitCode: "KTM"
+    baseTime_test{1..10}:
+        id: <uuid()>
+        value: <numberBetween(10, 5000)>
+        unitCode: "MIN"

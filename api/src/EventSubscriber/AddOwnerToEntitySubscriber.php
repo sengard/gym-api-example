@@ -29,22 +29,25 @@ final class AddOwnerToEntitySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['attachOwner', EventPriorities::PRE_WRITE],
+            KernelEvents::VIEW => ['action', EventPriorities::POST_RESPOND],
         ];
     }
 
-    public function attachOwner(ViewEvent $event)
+    public function action(ViewEvent $event)
     {
         $article = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if (!$article instanceof HasOwner || Request::METHOD_POST !== $method) {
-
-            // Only handle Article entities (Event is called on any Api entity)
-            return;
+        if ($article instanceof HasOwner && Request::METHOD_POST === $method) {
+            $this->attachOwnerToEntity($article);
         }
+    }
 
-        // maybe these extra null checks are not even needed
+    /**
+     * @param HasOwner $article
+     */
+    private function attachOwnerToEntity(HasOwner $article): void
+    {
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return;
@@ -55,10 +58,8 @@ final class AddOwnerToEntitySubscriber implements EventSubscriberInterface
             return;
         }
 
-
         // Attach the user to the not yet persisted Article
         /** @var HasOwner $article */
         $article->setUser($owner);
-
     }
 }
