@@ -6,7 +6,7 @@
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=7.3
 ARG NGINX_VERSION=1.17
-ARG VARNISH_VERSION=6.2
+ARG VARNISH_VERSION=6.3
 
 
 # "php" stage
@@ -20,7 +20,7 @@ RUN apk add --no-cache \
 		git \
 	;
 
-ARG APCU_VERSION=5.1.17
+ARG APCU_VERSION=5.1.18
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -120,9 +120,11 @@ COPY --from=api_platform_php /srv/api/public ./
 
 # "varnish" stage
 # does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
-FROM cooptilleuls/varnish:${VARNISH_VERSION}-alpine AS api_platform_varnish
+FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
 
-COPY docker/varnish/conf/default.vcl /usr/local/etc/varnish/default.vcl
+COPY docker/varnish/conf/default.vcl /etc/varnish/default.vcl
+
+CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]
 
 # api/Dockerfile
 FROM api_platform_php as api_platform_php_dev
