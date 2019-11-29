@@ -6,10 +6,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Model\HasOwner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * A person (alive, dead, undead, or fictional).
@@ -20,8 +23,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Person")
+ * @ApiFilter(SearchFilter::class, properties={"user": "exact"})
  */
-class Person extends AbstractDate
+class Person extends AbstractDate implements HasOwner
 {
     /**
      * @var string
@@ -122,8 +126,7 @@ class Person extends AbstractDate
     /**
      * @var User|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="user")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=false)
+     * @ORM\OneToOne(targetEntity="User", inversedBy="person")
      */
     private $user;
 

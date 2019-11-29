@@ -7,6 +7,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Model\HasOwner;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * The most generic type of item.
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @see http://schema.org/Thing Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
+ * @ApiFilter(SearchFilter::class, properties={"user": "exact"})
  *
  * @ORM\MappedSuperclass
  */
@@ -22,7 +25,7 @@ abstract class AbstractHasUser extends AbstractThing implements HasOwner
     /**
      * @var User|null
      * @ApiProperty(iri="http://schema.org/user")
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
