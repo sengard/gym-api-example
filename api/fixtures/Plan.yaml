@@ -9,7 +9,7 @@ App\Entity\Plan:
     plan_test_2:
         id: <uuid()>
         user: '@user_test'
-        isActive: true
+        isActive: false
         isCurrent: false
         name: "rabinovish plan !"
         description: "rabinovish plan to make you look buff!"

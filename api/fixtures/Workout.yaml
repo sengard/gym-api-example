@@ -7,11 +7,19 @@ App\Entity\Workout:
         dayNumber: 'http://schema.org/Monday'
         name: "Butt day !"
         description: <sentence()>
-    workout_first_plan_day_3:
+    workout_first_plan_day_2:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_1'
         dayNumber: 'http://schema.org/Thursday'
+        isActive: true
+        name: "body day"
+        description: <sentence()>
+    workout_first_plan_day_3:
+        id: <uuid()>
+        user: '@user_test'
+        plan: '@plan_test_1'
+        dayNumber: 'http://schema.org/Friday'
         isActive: true
         name: "body day"
         description: <sentence()>
