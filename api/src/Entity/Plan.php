@@ -4,27 +4,33 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 
 /**
  * The most generic type of item.
  *
- * @see http://schema.org/Thing Documentation on Schema.org
+ * @see http://schema.org/exercisePlan Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ApiResource(iri="http://schema.org/exercisePlan", normalizationContext={"groups"={"plan","thing"}})
+ * @ApiFilter(GroupFilter::class, arguments={"parameterName": "groups", "overrideDefaultGroups": false, "whitelist": {"withWorkouts"}})
  */
 class Plan extends AbstractHasUser
 {
     /**
      * @var string
      *
+     * @Groups({"plan"})
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @Assert\Uuid
@@ -33,6 +39,8 @@ class Plan extends AbstractHasUser
 
     /**
      * @var Collection<Workout>|null
+     * @Groups({"withWorkouts"})
+     * @ApiProperty(push=true)
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Workout", mappedBy="plan")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
@@ -42,6 +50,7 @@ class Plan extends AbstractHasUser
     /**
      * @var bool|null
      *
+     * @Groups({"plan"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isCurrent = true;

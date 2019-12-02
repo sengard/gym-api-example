@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * The most generic type of item.
@@ -23,6 +24,7 @@ abstract class AbstractThing extends AbstractDate
      *
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"thing"})
      */
     protected $name;
 
@@ -31,6 +33,7 @@ abstract class AbstractThing extends AbstractDate
      *
      * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"thing"})
      */
     protected $description;
 
@@ -39,15 +42,9 @@ abstract class AbstractThing extends AbstractDate
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\MediaObject")
      * @ApiProperty(iri="http://schema.org/image")
+     * @Groups({"thing"})
      */
     protected $image;
-
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(type="boolean",nullable=true,)
-     */
-    private $isActive = true;
 
     public function setName(?string $name): void
     {
@@ -77,21 +74,5 @@ abstract class AbstractThing extends AbstractDate
     public function getImage(): ?MediaObject
     {
         return $this->image;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsActive(): ?bool
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param bool|null $isActive
-     */
-    public function setIsActive(?bool $isActive): void
-    {
-        $this->isActive = $isActive;
     }
 }

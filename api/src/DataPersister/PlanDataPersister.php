@@ -41,7 +41,9 @@ class PlanDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+//        $user = $this->tokenStorage->getToken()->getUser();
+        /** @var Plan $data */
+        $user = $data->getUser();
         $plans = $this->entityManager->getRepository(Plan::class)->findBy(['user'=>$user->getId()]);
 
         if (!$user instanceof UserInterface) {
@@ -51,16 +53,19 @@ class PlanDataPersister implements ContextAwareDataPersisterInterface
         /** @var Plan $plan */
         foreach($plans as $plan){
             $plan->setIsCurrent(false);
+            $this->entityManager->persist($plan);
         }
 
-        /** @var Plan $data */
         $data->setIsCurrent(true);
         // call your persistence layer to save $data
+        $this->entityManager->persist($data);
+        $this->entityManager->flush();
         return $data;
     }
 
     public function remove($data, array $context = [])
     {
-        // call your persistence layer to delete $data
+        $this->entityManager->remove($data);
+        $this->entityManager->flush();
     }
 }

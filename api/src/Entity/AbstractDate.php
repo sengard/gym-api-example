@@ -6,6 +6,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -26,6 +27,7 @@ abstract class AbstractDate
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\DateTime
      * @ApiProperty(iri="http://schema.org/DateTime")
+     * @Groups({"date"})
      */
     protected $createdAt;
 
@@ -35,6 +37,7 @@ abstract class AbstractDate
      * @ORM\Column(type="datetime",nullable=true, options={"default": "CURRENT_TIMESTAMP"} )
      * @Assert\DateTime
      * @ApiProperty(iri="http://schema.org/DateTime")
+     * @Groups({"date"})
      */
     protected $updatedAt;
 

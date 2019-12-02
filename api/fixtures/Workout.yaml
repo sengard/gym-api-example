@@ -3,7 +3,6 @@ App\Entity\Workout:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_1'
-        isActive: true
         dayNumber: 'http://schema.org/Monday'
         name: "Butt day !"
         description: <sentence()>
@@ -12,7 +11,6 @@ App\Entity\Workout:
         user: '@user_test'
         plan: '@plan_test_1'
         dayNumber: 'http://schema.org/Thursday'
-        isActive: true
         name: "body day"
         description: <sentence()>
     workout_first_plan_day_3:
@@ -20,14 +18,12 @@ App\Entity\Workout:
         user: '@user_test'
         plan: '@plan_test_1'
         dayNumber: 'http://schema.org/Friday'
-        isActive: true
         name: "body day"
         description: <sentence()>
     workout_dummy_{1..40}:
-        id: <uuid()>
+        id: <uuid()>    
         user: '@user_dummy_*'
         plan: '@plan_dummy_*'
         dayNumber: 'http://schema.org/Monday'
-        isActive: true
         name: <sentence()>
         description: <sentence()>

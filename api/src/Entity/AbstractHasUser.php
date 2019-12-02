@@ -9,6 +9,8 @@ use App\Model\HasOwner;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * The most generic type of item.
@@ -27,6 +29,7 @@ abstract class AbstractHasUser extends AbstractThing implements HasOwner
      * @ApiProperty(iri="http://schema.org/user")
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"hasUser"})
      */
     private $user;
 
