@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enum;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use MyCLabs\Enum\Enum;
 
 /**
@@ -21,40 +22,40 @@ class DayOfWeek extends Enum
     /**
      * @var string the day of the week between Thursday and Saturday
      */
-    public const FRIDAY = 'http://schema.org/Friday';
+    public const FRIDAY = 'Friday';
 
     /**
      * @var string the day of the week between Sunday and Tuesday
      */
-    public const MONDAY = 'http://schema.org/Monday';
+    public const MONDAY = 'Monday';
 
     /**
      * @var string the day of the week between Tuesday and Thursday
      */
-    public const WEDNESDAY = 'http://schema.org/Wednesday';
+    public const WEDNESDAY = 'Wednesday';
 
     /**
      * @var string the day of the week between Wednesday and Friday
      */
-    public const THURSDAY = 'http://schema.org/Thursday';
+    public const THURSDAY = 'Thursday';
 
     /**
      * @var string the day of the week between Monday and Wednesday
      */
-    public const TUESDAY = 'http://schema.org/Tuesday';
+    public const TUESDAY = 'Tuesday';
 
     /**
      * @var string the day of the week between Friday and Sunday
      */
-    public const SATURDAY = 'http://schema.org/Saturday';
+    public const SATURDAY = 'Saturday';
 
     /**
      * @var string This stands for any day that is a public holiday; it is a placeholder for all official public holidays in some particular location. While not technically a "day of the week", it can be used with \[\[OpeningHoursSpecification\]\]. In the context of an opening hours specification it can be used to indicate opening hours on public holidays, overriding general opening hours for the day of the week on which a public holiday occurs.
      */
-    public const PUBLIC_HOLIDAYS = 'http://schema.org/PublicHolidays';
+    public const PUBLIC_HOLIDAYS = 'PublicHolidays';
 
     /**
      * @var string the day of the week between Saturday and Monday
      */
-    public const SUNDAY = 'http://schema.org/Sunday';
+    public const SUNDAY = 'Sunday';
 }

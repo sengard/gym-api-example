@@ -10,10 +10,10 @@ App\Entity\Plan:
         user: '@user_test'
         isCurrent: false
         name: "rabinovish plan !"
-        description: "rabinovish plan to make you look buff!"
+        description: "Rabinovish plan to make you look buff!"
     plan_dummy_{1..20}:
         id: <uuid()>
         user: '@user_dummy_*'
         isCurrent: false
-        name: "plan !"
+        name: <sentence(2)>
         description: "plan to make you look buff!"

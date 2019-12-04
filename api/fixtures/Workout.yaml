@@ -3,27 +3,34 @@ App\Entity\Workout:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_1'
-        dayNumber: 'http://schema.org/Monday'
+        dayOfWeek: 'Monday'
         name: "Butt day !"
         description: <sentence()>
     workout_first_plan_day_2:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_1'
-        dayNumber: 'http://schema.org/Thursday'
+        dayOfWeek: 'Thursday'
         name: "body day"
-        description: <sentence()>
+        description: <paragraph()>
     workout_first_plan_day_3:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_1'
-        dayNumber: 'http://schema.org/Friday'
+        dayOfWeek: 'Friday'
         name: "body day"
-        description: <sentence()>
+        description: <paragraph()>
+    workout_second_plan_day_{1..10}:
+        id: <uuid()>
+        user: '@user_test'
+        plan: '@plan_test_2'
+        dayOfWeek: '<dayOfWeek()>'
+        name: <sentence(2)>
+        description: <paragraph()>
     workout_dummy_{1..40}:
         id: <uuid()>    
         user: '@user_dummy_*'
         plan: '@plan_dummy_*'
-        dayNumber: 'http://schema.org/Monday'
-        name: <sentence()>
-        description: <sentence()>
+        dayOfWeek: 'Monday'
+        name: <sentence(2)>
+        description: <paragraph()>

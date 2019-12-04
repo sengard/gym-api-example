@@ -49,7 +49,7 @@ class Workout extends AbstractHasUser
      * @Assert\Choice(callback={"DayOfWeek", "toArray"})
      *  @Groups({"withWorkouts"})
      */
-    private $dayNumber;
+    private $dayOfWeek;
 
     /**
      * @var Collection<ExerciseWorkout>|null
@@ -84,14 +84,14 @@ class Workout extends AbstractHasUser
         return $this->plan;
     }
 
-    public function setDayNumber(?string $dayNumber): void
+    public function setDayOfWeek(?string $dayOfWeek): void
     {
-        $this->dayNumber = $dayNumber;
+        $this->dayOfWeek = $dayOfWeek;
     }
 
-    public function getDayNumber(): ?string
+    public function getDayOfWeek(): ?string
     {
-        return $this->dayNumber;
+        return $this->dayOfWeek;
     }
 
     public function addExerciseWorkout(ExerciseWorkout $exerciseWorkout): void
