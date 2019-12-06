@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 
 /**
  * The most generic type of item.
@@ -20,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/ExerciseAction")
+ * @ApiResource(iri="http://schema.org/ExerciseAction", normalizationContext={"groups"={"workout","thing"}})
  */
 class Workout extends AbstractHasUser
 {
@@ -30,7 +32,7 @@ class Workout extends AbstractHasUser
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @Assert\Uuid
-     *  @Groups({"withWorkouts"})
+     *  @Groups({"withWorkouts","workout"})
      */
     private $id;
 
@@ -47,7 +49,7 @@ class Workout extends AbstractHasUser
      *
      * @ORM\Column(nullable=true)
      * @Assert\Choice(callback={"DayOfWeek", "toArray"})
-     *  @Groups({"withWorkouts"})
+     *  @Groups({"withWorkouts","workout"})
      */
     private $dayOfWeek;
 
@@ -56,6 +58,7 @@ class Workout extends AbstractHasUser
      *
      * @ORM\OneToMany(targetEntity="App\Entity\ExerciseWorkout", mappedBy="workout")
      * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})
+     * @Groups({"workout"})
      */
     private $exerciseWorkouts;
 

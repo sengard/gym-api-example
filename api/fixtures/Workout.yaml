@@ -20,17 +20,22 @@ App\Entity\Workout:
         dayOfWeek: 'Friday'
         name: "body day"
         description: <paragraph()>
+        
+        
+        
     workout_second_plan_day_{1..10}:
         id: <uuid()>
         user: '@user_test'
         plan: '@plan_test_2'
-        dayOfWeek: '<dayOfWeek()>'
+        dayOfWeek: <dayOfWeek()>
         name: <sentence(2)>
         description: <paragraph()>
+        
+        
     workout_dummy_{1..40}:
         id: <uuid()>    
         user: '@user_dummy_*'
         plan: '@plan_dummy_*'
-        dayOfWeek: 'Monday'
+        dayOfWeek: <dayOfWeek()>
         name: <sentence(2)>
         description: <paragraph()>

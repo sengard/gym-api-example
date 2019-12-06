@@ -11,6 +11,18 @@ App\Entity\ExerciseWorkout:
         baseWeight: <numberBetween(10, 60)>
         baseRange: <numberBetween(10, 5000)>
         baseTime: <numberBetween(10, 5000)>
+    exercise_workout_test_day2_{1..10}:
+        id: <uuid()>
+        exerciseOrder: <current()>
+        workout: "@workout_first_plan_day_2"
+        exercise: "@exercise_dummy_user_*"
+        betweenSetsRestPeriod: <numberBetween(30, 60)>
+        afterExerciseRestPeriod: <numberBetween(60, 120)>
+        baseRep: <numberBetween(6, 20)>
+        baseSet: <numberBetween(2, 5)>
+        baseWeight: <numberBetween(10, 60)>
+        baseRange: <numberBetween(10, 5000)>
+        baseTime: <numberBetween(10, 5000)>
     exercise_workout_test_day3_{1..10}:
         id: <uuid()>
         exerciseOrder: <current()>
@@ -23,6 +35,21 @@ App\Entity\ExerciseWorkout:
         baseWeight: <numberBetween(10, 60)>
         baseRange: <numberBetween(10, 5000)>
         baseTime: <numberBetween(10, 5000)>
+
+    exercise_workout_second_plan_{1..100}:
+        id: <uuid()>
+        exerciseOrder: <current()>
+        workout: "@workout_second_plan_day_<numberBetween(1, 10)>"
+        exercise: "@exercise_dummy_user_*"
+        betweenSetsRestPeriod: <numberBetween(30, 60)>
+        afterExerciseRestPeriod: <numberBetween(60, 120)>
+        baseRep: <numberBetween(6, 20)>
+        baseSet: <numberBetween(2, 5)>
+        baseWeight: <numberBetween(10, 60)>
+        baseRange: <numberBetween(10, 5000)>
+        baseTime: <numberBetween(10, 5000)>
+        
+        
     exercise_workout_dummy_{1..80}:
         id: <uuid()>
         exerciseOrder: <current()>

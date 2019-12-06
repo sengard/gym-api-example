@@ -7,6 +7,9 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 
 /**
  * The most generic type of item.
@@ -14,7 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @see http://schema.org/Thing Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
- *
  * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Thing")
  */
@@ -26,6 +28,7 @@ class ExerciseWorkout
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @Assert\Uuid
+     * @Groups({"workout"})
      */
     private $id;
 
@@ -33,6 +36,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $exerciseOrder;
 
@@ -49,6 +53,7 @@ class ExerciseWorkout
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Exercise")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"workout"})
      */
     private $exercise;
 
@@ -56,6 +61,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $afterExerciseRestPeriod;
 
@@ -70,6 +76,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $baseRep;
 
@@ -77,6 +84,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $baseSet;
 
@@ -84,6 +92,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $baseWeight;
 
@@ -91,6 +100,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $baseRange;
 
@@ -98,6 +108,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $baseTime;
 
