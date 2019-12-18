@@ -19,6 +19,15 @@ use MyCLabs\Enum\Enum;
  */
 class DayOfWeek extends Enum
 {
+    public const ORDER = [
+        self::MONDAY => 1,
+        self::TUESDAY => 2,
+        self::WEDNESDAY => 3,
+        self::THURSDAY => 4,
+        self::FRIDAY => 5,
+        self::SATURDAY => 6,
+        self::SUNDAY => 7,
+        ];
     /**
      * @var string the day of the week between Thursday and Saturday
      */

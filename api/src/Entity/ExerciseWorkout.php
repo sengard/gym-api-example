@@ -14,11 +14,11 @@ use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 /**
  * The most generic type of item.
  *
- * @see http://schema.org/Thing Documentation on Schema.org
+ * @see http://schema.org/ExerciseAction Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ApiResource(iri="http://schema.org/ExerciseAction")
  */
 class ExerciseWorkout
 {
@@ -69,6 +69,7 @@ class ExerciseWorkout
      * @var int|null
      *
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"workout"})
      */
     private $betweenSetsRestPeriod;
 

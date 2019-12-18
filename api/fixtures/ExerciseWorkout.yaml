@@ -1,8 +1,20 @@
 App\Entity\ExerciseWorkout:
+    exercise_workout_top_body{1..10}:
+        id: <uuid()>
+        workout: "@workout_top_body"
+        exercise: "@exercise_top_body_*"
+        betweenSetsRestPeriod: <numberBetween(30, 60)>
+        exerciseOrder: <current()>
+        afterExerciseRestPeriod: <numberBetween(60, 120)>
+        baseRep: <numberBetween(6, 20)>
+        baseSet: <numberBetween(2, 5)>
+        baseWeight: <numberBetween(10, 60)>
+        baseRange: <numberBetween(10, 5000)>
+        baseTime: <numberBetween(10, 5000)>
     exercise_workout_test_{1..10}:
         id: <uuid()>
         workout: "@workout_first_plan_day_1"
-        exercise: "@exercise_dummy_user_*"
+        exercise: "@exercise_top_body_*"
         betweenSetsRestPeriod: <numberBetween(30, 60)>
         exerciseOrder: <current()>
         afterExerciseRestPeriod: <numberBetween(60, 120)>
@@ -15,7 +27,7 @@ App\Entity\ExerciseWorkout:
         id: <uuid()>
         exerciseOrder: <current()>
         workout: "@workout_first_plan_day_2"
-        exercise: "@exercise_dummy_user_*"
+        exercise: "@exercise_top_body_*"
         betweenSetsRestPeriod: <numberBetween(30, 60)>
         afterExerciseRestPeriod: <numberBetween(60, 120)>
         baseRep: <numberBetween(6, 20)>
@@ -27,7 +39,7 @@ App\Entity\ExerciseWorkout:
         id: <uuid()>
         exerciseOrder: <current()>
         workout: "@workout_first_plan_day_3"
-        exercise: "@exercise_dummy_user_*"
+        exercise: "@exercise_top_body_*"
         betweenSetsRestPeriod: <numberBetween(30, 60)>
         afterExerciseRestPeriod: <numberBetween(60, 120)>
         baseRep: <numberBetween(6, 20)>
@@ -40,7 +52,7 @@ App\Entity\ExerciseWorkout:
         id: <uuid()>
         exerciseOrder: <current()>
         workout: "@workout_second_plan_day_<numberBetween(1, 10)>"
-        exercise: "@exercise_dummy_user_*"
+        exercise: "@exercise_top_body_*"
         betweenSetsRestPeriod: <numberBetween(30, 60)>
         afterExerciseRestPeriod: <numberBetween(60, 120)>
         baseRep: <numberBetween(6, 20)>
@@ -54,7 +66,7 @@ App\Entity\ExerciseWorkout:
         id: <uuid()>
         exerciseOrder: <current()>
         workout: "@workout_dummy_*"
-        exercise: "@exercise_dummy_*"
+        exercise: "@exercise_top_body_*"
         betweenSetsRestPeriod: <numberBetween(30, 60)>
         afterExerciseRestPeriod: <numberBetween(60, 120)>
         baseRep: <numberBetween(6, 20)>

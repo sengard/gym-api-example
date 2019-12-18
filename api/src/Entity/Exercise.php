@@ -11,12 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * The most generic type of item.
  *
- * @see http://schema.org/Thing Documentation on Schema.org
+ * @see http://schema.org/PhysicalActivity Documentation on Schema.org
  *
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/Thing")
+ * @ApiResource(iri="http://schema.org/PhysicalActivity")
  */
 class Exercise extends AbstractHasUser
 {

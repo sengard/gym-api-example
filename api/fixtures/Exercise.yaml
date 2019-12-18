@@ -1,15 +1,25 @@
 App\Entity\Exercise:
-    exercise_dummy_{1..80}:
-        id: <uuid()>
-        user: '@user_dummy_*'
-        language: "en"   
-        typeOfExercise: <sentence()>
-        muscleType: <sentence()>
-        additionalMuscleType: <sentence()>
-        additionalMuscleType2: <sentence()>
-        name: <sentence()>
-        description: <paragraph()>
-    exercise_dummy_user_{1..20}:
+#    exercise_dummy_{1..80}:
+#        id: <uuid()>
+#        user: '@user_dummy_*'
+#        language: "en"   
+#        typeOfExercise: <sentence()>
+#        muscleType: <sentence()>
+#        additionalMuscleType: <sentence()>
+#        additionalMuscleType2: <sentence()>
+#        name: <sentence()>
+#        description: <paragraph()>
+#    exercise_dummy_user_{1..20}:
+#        id: <uuid()>
+#        user: '@user_test'
+#        language: "en"
+#        typeOfExercise: <sentence()>
+#        muscleType: <sentence()>
+#        additionalMuscleType: <sentence()>
+#        additionalMuscleType2: <sentence()>
+#        name: <sentence()>
+#        description: <paragraph()>
+    exercise_top_body_1:
         id: <uuid()>
         user: '@user_test'
         language: "en"
@@ -17,5 +27,55 @@ App\Entity\Exercise:
         muscleType: <sentence()>
         additionalMuscleType: <sentence()>
         additionalMuscleType2: <sentence()>
-        name: <sentence()>
+        name: "Flat Barbell Bench Press"
+        description: <paragraph()>
+    exercise_top_body_2:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: "Incline Dumbbell Bench Press"
+        description: <paragraph()>
+    exercise_top_body_3:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: "Machine Chest Fly"
+        description: <paragraph()>
+    exercise_top_body_4:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: "Push-up"
+        description: <paragraph()>
+    exercise_top_body_5:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: "ABS"
+        description: <paragraph()>
+    exercise_top_body_6:
+        id: <uuid()>
+        user: '@user_test'
+        language: "en"
+        typeOfExercise: <sentence()>
+        muscleType: <sentence()>
+        additionalMuscleType: <sentence()>
+        additionalMuscleType2: <sentence()>
+        name: "Cardio"
         description: <paragraph()>

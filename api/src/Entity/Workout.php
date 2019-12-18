@@ -22,7 +22,7 @@ use ApiPlatform\Core\Serializer\Filter\GroupFilter;
  * @author Maxim Yalagin <yalagin@gmail.com>
  *
  * @ORM\Entity
- * @ApiResource(iri="http://schema.org/ExerciseAction", normalizationContext={"groups"={"workout","thing"}})
+ * @ApiResource(iri="http://schema.org/ExerciseAction", normalizationContext={"groups"={"workout","thing"}}, attributes={"order"={"dayOfWeekOrder": "ASC"}})
  */
 class Workout extends AbstractHasUser
 {
@@ -52,6 +52,8 @@ class Workout extends AbstractHasUser
      *  @Groups({"withWorkouts","workout"})
      */
     private $dayOfWeek;
+
+    private $dayOfWeekOrder;
 
     /**
      * @var Collection<ExerciseWorkout>|null
@@ -110,5 +112,15 @@ class Workout extends AbstractHasUser
     public function getExerciseWorkouts(): Collection
     {
         return $this->exerciseWorkouts;
+    }
+
+    public function DayOfWeekOrder()
+    {
+        return DayOfWeek::ORDER[$this->dayOfWeek];
+    }
+
+    public function setDayOfWeekOrder()
+    {
+        $this->dayOfWeekOrder = DayOfWeek::ORDER[$this->dayOfWeek];
     }
 }

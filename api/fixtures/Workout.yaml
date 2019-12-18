@@ -1,4 +1,11 @@
 App\Entity\Workout:
+    workout_top_body:
+        id: <uuid()>
+        user: '@user_test'
+        plan: '@plan_test_1'
+        dayOfWeek:  <dayOfWeek()>
+        name: "Top body"
+        description: <sentence()>
     workout_first_plan_day_1:
         id: <uuid()>
         user: '@user_test'
@@ -20,6 +27,7 @@ App\Entity\Workout:
         dayOfWeek: 'Friday'
         name: "body day"
         description: <paragraph()>
+        
         
         
         
